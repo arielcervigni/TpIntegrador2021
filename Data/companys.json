@@ -1,0 +1,42 @@
+[
+    {
+        "companyId": 1,
+        "cuit": "123",
+        "description": "d",
+        "aboutUs": "a",
+        "companyLink": "l",
+        "active": true
+    },
+    {
+        "companyId": 2,
+        "cuit": "a",
+        "description": "a",
+        "aboutUs": "a",
+        "companyLink": "a",
+        "active": true
+    },
+    {
+        "companyId": 3,
+        "cuit": "asd",
+        "description": "asd",
+        "aboutUs": "asd",
+        "companyLink": "asd",
+        "active": true
+    },
+    {
+        "companyId": 4,
+        "cuit": "123",
+        "description": "d",
+        "aboutUs": "a",
+        "companyLink": "l",
+        "active": true
+    },
+    {
+        "companyId": 5,
+        "cuit": "1111111",
+        "description": "des",
+        "aboutUs": "acerca",
+        "companyLink": "lin",
+        "active": true
+    }
+]
