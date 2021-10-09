@@ -11,6 +11,18 @@
       if (isset($message))
         echo $message;
         ?>
+    
+    <div class="content" style="width:100%"> 
+        <form style="width:100%" action= <?php echo FRONT_ROOT ?>Company/SearchFilter method="post">
+            <div style="width:70%">
+              <input type="text" name="word" size="" placeholder="Ingrese una palabra" value=""> 
+            </div>
+            <div style="width:30% ">
+              <input type="submit" class="btn" value="BUSCAR" name="search"></input>  
+            </div>
+        </form>
+      </div>
+
     <div class="content"> 
       <div class="scrollable">
       

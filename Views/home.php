@@ -26,7 +26,7 @@
   </div>
 </div>
 <!-- #######################################################################3 -->
-<div style="margin-left:14%";>
+<div>
   <div class="wrapper row3 img-login">
       <div class="div-login"><br>
         <h1 class="text-login">Ingresa tu email para iniciar sesión. </h1>

@@ -32,14 +32,6 @@
         "active": true
     },
     {
-        "companyId": 5,
-        "cuit": "5",
-        "description": "5",
-        "aboutUs": "5",
-        "companyLink": "5",
-        "active": true
-    },
-    {
         "companyId": 6,
         "cuit": "6",
         "description": "6",
@@ -77,6 +69,22 @@
         "description": "Empresa de Ariel",
         "aboutUs": "Soy mi empresa",
         "companyLink": "www.ariel.com.ar",
+        "active": true
+    },
+    {
+        "companyId": 12,
+        "cuit": "20370982105",
+        "description": "Empresa de Ariel2",
+        "aboutUs": "Soy mi empresa2",
+        "companyLink": "www.ariel.com.ar2",
+        "active": true
+    },
+    {
+        "companyId": 13,
+        "cuit": "55",
+        "description": "55",
+        "aboutUs": "55",
+        "companyLink": "55",
         "active": true
     }
 ]

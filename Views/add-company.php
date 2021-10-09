@@ -64,9 +64,6 @@
           </table>
           <div>
             <input type="submit" class="btn" value="AGREGAR" style="background-color:#DC8E47;color:white;"/>
-            <form action=<?php echo FRONT_ROOT ?>Student/ShowListView method="post"  style="background-color: #EAEDED;padding: 2rem !important;">
-              <input type="submit" class="btn" value="ELIMINAR" style="background-color:#DC8E47;color:white;" disabled/>  
-            </form>
             <input onclick="location.href='ShowListView'"  type="submit" class="btn" value="VER LISTA" style="background-color:#DC8E47;color:white;"/>
 
           </div>

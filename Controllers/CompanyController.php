@@ -156,5 +156,26 @@ class CompanyController
         
         return $id+1;
     }
+
+    function SearchFilter($word) {
+
+        $companyList = $this->companyDAO->getAll();
+        $companyFilter = array();
+        
+        foreach ($companyList as $company) {
+
+            if($word !== ""){
+                if (strpos($company->getDescription(), $word) !== false) 
+                    array_push($companyFilter, $company);
+                
+                $companyList = $companyFilter;
+            }
+        }
+
+        if(empty($companyList))
+            $message = "No hay empresas para mostrar con esa palabra.";
+        
+        require_once(VIEWS_PATH."company-list.php");
+    }
 }
 ?>
