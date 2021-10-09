@@ -20,59 +20,57 @@
 <main class="container clear"> 
     <div class="content"> 
       <div id="comments" >
-        <h2>AGREGAR UNA NUEVA EMPRESA</h2>
-
-        <?php 
-          if(isset($message)){
-              echo $message;
-          }
-          
-        ?>  
-        
-        <form action=<?php echo FRONT_ROOT ?>Company/AddIDUnico method="post"  style="background-color: #EAEDED;padding: 2rem !important;">
+        <h2>EMPRESA</h2>
+      
+        <form action=<?php echo FRONT_ROOT ?>Company/ShowModifyView method="post"  style="background-color: #EAEDED;padding: 2rem !important;">
         <table> 
             <tbody align="center">
             
 
-            <input type="hidden" name="companyId" value="">
+            <input type="hidden" name="companyId" value="<?php echo $companyId ?>">
 
                 <tr style="max-width: 100px;">
                   <div>
                     <label for="">CUIT:</label>
-                    <input type="text" name="cuit" size="11" placeholder="11 dígitos sin espacios" value="" required>
+                    <input type="text" name="cuit" size="11" placeholder="11 dígitos sin espacios" value="<?php echo $cuit ?>" disabled>
                   </div>
                 </tr>
                 <tr>
                   <div>
                     <label for="">Descripción:</label>
-                    <input type="text" name="description" size="100" placeholder="Nombre de la empresa" value="" required>
+                    <input type="text" name="description" size="100" placeholder="Nombre de la empresa" value="<?php echo $description ?>" disabled>
                   </div>
                 </tr>
                 <tr>
                   <div>
                     <label for="">Acerca de nosotros:</label>
-                    <input type="text" name="aboutUs" size="300" placeholder="Breve resumen de la empresa"  value="" required>
+                    <input type="text" name="aboutUs" size="300" placeholder="Breve resumen de la empresa"  value="<?php echo $aboutUs ?>"disabled>
                   </div>
                 </tr>     
                 <tr>
                   <div>
                     <label for="">  Link de la empresa:</label>
-                    <input type="text" name="companyLink" size="" placeholder="Sitio web o Linkedin" value="" required>
+                    <input type="text" name="companyLink" size="" placeholder="Sitio web o Linkedin" value="<?php echo $companyLink ?>" disabled>
                   </div>
                 </tr>         
               </tbody>
           </table>
           <div>
-            <input type="submit" class="btn" value="AGREGAR" style="background-color:#DC8E47;color:white;"/>
-            <form action=<?php echo FRONT_ROOT ?>Student/ShowListView method="post"  style="background-color: #EAEDED;padding: 2rem !important;">
-              <input type="submit" class="btn" value="ELIMINAR" style="background-color:#DC8E47;color:white;" disabled/>  
-            </form>
-            <input onclick="location.href='ShowListView'"  type="submit" class="btn" value="VER LISTA" style="background-color:#DC8E47;color:white;"/>
-
+          <?php if ($_SESSION["loggeduser"]->getProfile() == "Administrador") { ?>
+            <input type="submit" class="btn" value="MODIFICAR" style="background-color:#DC8E47;color:white;"/>
+            <?php } ?>
+            <input onclick="location.href='ShowListView'"  type="submit" class="btn" value="VER LISTA" style="background-color:#DC8E47;color:white;"/> 
           </div>
         </form>
+        <?php if ($_SESSION["loggeduser"]->getProfile() == "Administrador") { ?>   
+        <form action=<?php echo FRONT_ROOT ?>Company/RemoveItem method="post" style="background-color: #EAEDED;padding: 2rem !important;">
+          <input type="hidden" name="companyId" value="<?php echo $companyId ?>">  
+          <input type="submit" class="btn" value="ELIMINAR" style="background-color:#DC8E47;color:white;"/>
+      </form>
+        <?php } ?>
       </div>
-        
+      
+      
     </div>
   </main>
 </div>

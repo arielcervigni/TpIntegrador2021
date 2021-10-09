@@ -9,34 +9,74 @@
     },
     {
         "companyId": 2,
-        "cuit": "a",
-        "description": "a",
-        "aboutUs": "a",
-        "companyLink": "a",
+        "cuit": "2",
+        "description": "1",
+        "aboutUs": "1",
+        "companyLink": "1",
         "active": true
     },
     {
         "companyId": 3,
-        "cuit": "asd",
-        "description": "asd",
-        "aboutUs": "asd",
-        "companyLink": "asd",
+        "cuit": "3",
+        "description": "3",
+        "aboutUs": "3",
+        "companyLink": "3",
         "active": true
     },
     {
         "companyId": 4,
-        "cuit": "123",
-        "description": "d",
-        "aboutUs": "a",
-        "companyLink": "l",
+        "cuit": "4",
+        "description": "4",
+        "aboutUs": "4",
+        "companyLink": "4",
         "active": true
     },
     {
         "companyId": 5,
-        "cuit": "1111111",
-        "description": "des",
-        "aboutUs": "acerca",
-        "companyLink": "lin",
+        "cuit": "5",
+        "description": "5",
+        "aboutUs": "5",
+        "companyLink": "5",
+        "active": true
+    },
+    {
+        "companyId": 6,
+        "cuit": "6",
+        "description": "6",
+        "aboutUs": "6",
+        "companyLink": "6",
+        "active": true
+    },
+    {
+        "companyId": 8,
+        "cuit": "8",
+        "description": "8",
+        "aboutUs": "8",
+        "companyLink": "8",
+        "active": true
+    },
+    {
+        "companyId": 9,
+        "cuit": "9",
+        "description": "9",
+        "aboutUs": "9",
+        "companyLink": "9",
+        "active": true
+    },
+    {
+        "companyId": 10,
+        "cuit": "10",
+        "description": "10",
+        "aboutUs": "10",
+        "companyLink": "10",
+        "active": true
+    },
+    {
+        "companyId": 11,
+        "cuit": "20370982105",
+        "description": "Empresa de Ariel",
+        "aboutUs": "Soy mi empresa",
+        "companyLink": "www.ariel.com.ar",
         "active": true
     }
 ]

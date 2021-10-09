@@ -14,7 +14,7 @@
     <div class="content"> 
       <div class="scrollable">
       
-      <form action= <?php echo FRONT_ROOT ?>Company/RemoveItem method="post">
+      <form action= <?php echo FRONT_ROOT ?>Company/ShowViewView method="post">
         <table style="text-align:center;">
           <thead>
             <tr>
@@ -24,8 +24,7 @@
               <th style="width: 35%;">Acerca de</th>
               <th style="width: 15%;">Link</th>
               <th style="width: 5%;">Active</th>
-              <th style="width: 5%;">Eliminar</th>
-              <th style="width: 5%;">Modificar</th>
+              <th style="width: 10%;">Ver</th>
             </tr>
           </thead>
           <tbody>
@@ -41,9 +40,10 @@
                    <td><?php echo $company->getAboutUs() ?></td>
                    <td><?php echo $company->getCompanyLink() ?></td>  
                    <td><?php echo $company->getActive() ?></td>  
-                   <td><button type="submit" class="btn" value="<?php echo $company->getCompanyId()?>" name="remove"> Eliminar </button></td>
-                   <td><button type="submit" class="btn" value="<?php echo $company->getCuit()?>" name="modify"> Modificar </button></td>
-                     
+                   <td><button type="submit" class="btn" value="<?php echo $company->getCompanyId()?>" name="view"> Ver </button></td>
+                   
+                   <!-- <td><button type="submit" class="btn" value="<?php echo $company->getCompanyId()?>" name="remove"> Eliminar </button></td> -->
+                   <!-- <td><button type="submit" class="btn" value="<?php echo $company->getCuit()?>" name="modify"> Modificar </button></td> -->
                    
                    <!-- <input onclick="location.href='ShowAddView'" type="button" class="btn" value="Modificar" style="background-color:#DC8E47;color:white;"/></td>               -->
                    </tr>
@@ -52,8 +52,10 @@
                 ?>        
           </tbody>
         </table>
-        <input onclick="location.href='ShowAddView'" type="button" class="btn" value="AGREGAR" style="background-color:#DC8E47;color:white;"/>
-        </form> 
+        <?php if($_SESSION["loggeduser"]->getProfile() == "Administrador") {?>
+          <input onclick="location.href='ShowAddView'" type="button" class="btn" value="AGREGAR" style="background-color:#DC8E47;color:white;"/>
+        <?php }?>  
+      </form> 
       </div>
       
     </div>

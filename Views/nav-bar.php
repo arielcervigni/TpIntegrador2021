@@ -7,11 +7,16 @@
       <ul class="clear">
         <li class="active"><a class="drop" href="#">Menu</a>
           <ul>
-            <li><a href="<?php echo FRONT_ROOT ?>Company/ShowAddView">Add Company</a></li> 
-            <li><a href="<?php echo FRONT_ROOT ?>Company/ShowListView">Company List/Remove</a></li>
-            <li><a href="<?php echo FRONT_ROOT ?>Student/ShowListView">LIST/REMOVE</a></li>
-            <li><a href="<?php echo FRONT_ROOT ?>Home/Index">CLOSE</a></li>
-          </ul>
+          <li><a href="<?php echo FRONT_ROOT ?>Student/ShowMyProfile">MI PERFIL</a></li>
+          <li><a href="<?php echo FRONT_ROOT ?>Company/ShowListView">EMPRESAS</a></li>
+          <?php if($_SESSION["loggeduser"]->getProfile() == "Administrador"){ ?>
+              <li><a href="<?php echo FRONT_ROOT ?>Company/ShowAddView">AGREGAR EMPRESA</a></li> 
+              <li><a href="<?php echo FRONT_ROOT ?>Student/ShowListView">ESTUDIANTES</a></li>
+          <?php } else { ?>
+              
+          <?php } ?>
+          <li><a href="<?php echo FRONT_ROOT ?>Home/Index">SALIR</a></li>
+        </ul>
     </nav>
   </header>
 </div>

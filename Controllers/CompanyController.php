@@ -14,10 +14,39 @@ class CompanyController
         $this->companyDAO = new CompanyDAO();
     }
 
-    public function ShowAddView ($message = "", $company = null)
+    public function ShowAddView ($message = "")
     {
+        
         require_once(VIEWS_PATH."add-company.php");
 
+    }
+
+    public function ShowViewView ($companyId)
+    {
+        $companyList = $this->companyDAO->getAll();
+        $pos = $this->searchPositionAtId($companyList, $companyId); 
+        
+        $companyId = $companyList[$pos]->getCompanyId();
+        $cuit = $companyList[$pos]->getCuit();
+        $description = $companyList[$pos]->getDescription();
+        $aboutUs = $companyList[$pos]->getAboutUs();
+        $companyLink = $companyList[$pos]->getCompanyLink();
+        
+        require_once(VIEWS_PATH."view-company.php");
+    }
+
+    public function ShowModifyView ($companyId)
+    {
+        $companyList = $this->companyDAO->getAll();
+        $pos = $this->searchPositionAtId($companyList, $companyId); 
+        
+        $companyId = $companyList[$pos]->getCompanyId();
+        $cuit = $companyList[$pos]->getCuit();
+        $description = $companyList[$pos]->getDescription();
+        $aboutUs = $companyList[$pos]->getAboutUs();
+        $companyLink = $companyList[$pos]->getCompanyLink();
+        
+        require_once(VIEWS_PATH."modify-company.php");
     }
 
     public function ShowListView ($message = "")
@@ -43,9 +72,11 @@ class CompanyController
        
     }
 
-    public function Modify ($cuit, $description, $aboutUs, $companyLink, $companyPos) {
-
+    public function Modify ($cuit, $description, $aboutUs, $companyLink, $companyId) {
+        
         $companyList = $this->companyDAO->getAll();
+        $companyPos = $this->searchPositionAtId($companyList, $companyId);
+        
         $companyList[$companyPos]->setCuit($cuit);
         $companyList[$companyPos]->setDescription($description);
         $companyList[$companyPos]->setAboutUs($aboutUs);
@@ -61,21 +92,15 @@ class CompanyController
     public function AddIDUnico ($cuit, $description, $aboutUs, $companyLink)
     {    
         $companyList = $this->companyDAO->getAll();
-        $companyPos = $this->searchPositionAtCuit($companyList,$cuit);
-        
-        if($companyPos == -1){
-            $companyId = $this->getLastId($companyList);
-            $active = true;
+        $companyId = $this->getLastId($companyList);
+        $active = true;
 
-            if($companyId > 0)
-                $this->Add($companyId, $cuit, $description, $aboutUs, $companyLink, $active);
-            else
-            {
-                $message = "Error al cargar el celular. Código duplicado";
-                $this->ShowAddView($message);
-            }
-        } else {
-            $this->Modify($cuit, $description, $aboutUs, $companyLink, $companyPos);
+        if($companyId > 0)
+            $this->Add($companyId, $cuit, $description, $aboutUs, $companyLink, $active);
+        else
+        {
+            $message = "Error al cargar la empresa. Código duplicado";
+            $this->ShowAddView($message);
         }
         
     }
@@ -84,33 +109,24 @@ class CompanyController
     public function RemoveItem ($remove)
     {
         $companyList = $this->companyDAO->getAll();
-        
-        if(gettype($remove) == 'int') {
-            $pos = $this->searchPositionAtId ($companyList, $remove);
 
-            if ($pos != -1)
-                unset($companyList[$pos]);
+        $pos = $this->searchPositionAtId ($companyList, $remove);
+
+        if ($pos != -1)
+            unset($companyList[$pos]);
         
-            $this->companyDAO->setcompanyList($companyList);
-            $companyList = $this->companyDAO->getcompanyList($companyList);
-            $this->companyDAO->saveData();
+        $this->companyDAO->setcompanyList($companyList);
+        $companyList = $this->companyDAO->getcompanyList($companyList);
+        $this->companyDAO->saveData();
             
-            if(count($companyList) == 0)
-            {
-                $message = "No hay empresas para mostrar";
-                $this->ShowListView($message);
-            }
-            else
+        if(count($companyList) == 0) {
+            $message = "No hay empresas para mostrar";
+            $this->ShowListView($message);
+        } else
             $this->ShowListView();
-        } else if (gettype($remove) == 'string') {
-
-            $i = $this->searchPositionAtCuit($companyList, $remove);
-            $company = $companyList[$i];
-            var_dump($company);
-            $this->ShowAddView("",$company);
-        }
-        
+    
     }
+        
 
     public function searchPositionAtId ($array, $companyId)
     {
@@ -119,23 +135,6 @@ class CompanyController
         while ($i < count($array))
         {
             if($companyId == $array[$i]->getCompanyId() )
-            {
-                $rta = $i;
-                break;
-            }
-            else
-                $i++;
-        }
-        return $rta;
-    }
-
-    public function searchPositionAtCuit ($array, $cuit)
-    {
-        $i = 0;
-        $rta = -1;
-        while ($i < count($array))
-        {
-            if($cuit == $array[$i]->getCUIT() )
             {
                 $rta = $i;
                 break;

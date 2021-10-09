@@ -2,7 +2,7 @@
  include('header.php');
  include('nav-bar.php');
 ?>
-<!-- ################################################################################################ -->
+<!-- ################################################################################################ 
 <div class="wrapper row2 bgded" style="background-image:url('../images/demo/backgrounds/1.png');">
   <div class="overlay">
     <div id="breadcrumb" class="clear"> 
@@ -17,6 +17,7 @@
 <!-- ################################################################################################ -->
 <div class="wrapper row4">
   <main class="hoc container clear"> 
+  <h2>LISTA DE ESTUDIANTES</h2>
     <!-- main body -->
     <div class="content"> 
       <div class="scrollable">
@@ -33,6 +34,8 @@
           </thead>
           <tbody>
                 <?php
+                   
+
                    foreach ($studentList as $student)
                    {
                 ?>

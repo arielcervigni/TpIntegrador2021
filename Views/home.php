@@ -4,7 +4,7 @@
 <div class="wrapper row1">
   <header id="header" class="clear"> 
     <div id="logo" class="fl_left">
-      <h1>Cellphones</h1>
+      <h1>TP Integrador 2021</h1>
     </div>
     <!-- <nav id="mainav" class="fl_right">
       <ul class="clear">
@@ -26,19 +26,22 @@
   </div>
 </div>
 <!-- #######################################################################3 -->
-<div class="wrapper row3 img-login">
-  <div class="div-login"><br>
-    <h1 class="text-login">Ingresa tu email para iniciar sesión. </h1>
-</div>
-  <div class="div-login">  
-    <form action="<?php echo FRONT_ROOT ?>User/login" method="post">
-        <input class="input-login" type="text" name="username" placeholder="Nombre Usuario" required>
-        <input class="input-login" type="password" name="password" placeholder="Contraseña" required >
-        <button class="btn-login btn" type="submit" name="">Ingresar</button>
-      </form>
-        <?php 
-        if (isset($message))
-          echo $message;
-        ?>
+<div style="margin-left:14%";>
+  <div class="wrapper row3 img-login">
+      <div class="div-login"><br>
+        <h1 class="text-login">Ingresa tu email para iniciar sesión. </h1>
+      </div>
+    <div class="div-login">  
+
+      <form action="<?php echo FRONT_ROOT ?>Student/login" method="post">
+          <input class="input-login" type="text" name="email" placeholder="Email" required>
+          <!-- <input class="input-login" type="password" name="password" placeholder="Contraseña" required> -->
+          <br><button class="btn-login btn" type="submit" name="">Ingresar</button><br>
+        </form>
+          <?php 
+          if (isset($message))
+            echo $message;
+          ?>
+    </div>
   </div>
 </div>
