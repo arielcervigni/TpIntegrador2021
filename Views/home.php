@@ -37,11 +37,15 @@
           <input class="input-login" type="text" name="email" placeholder="Email" required>
           <!-- <input class="input-login" type="password" name="password" placeholder="Contraseña" required> -->
           <br><button class="btn-login btn" type="submit" name="">Ingresar</button><br>
+          <br>
+          <br>
         </form>
           <?php 
           if (isset($message))
             echo $message;
           ?>
+          <br>
+          <br>
     </div>
   </div>
 </div>

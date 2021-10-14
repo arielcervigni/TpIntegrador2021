@@ -42,12 +42,17 @@ class StudentController
                     $_SESSION["loggeduser"] = $student;
                     $this->ShowMyProfile($student);
                     
-                }       
+                } else if ($student->getActive() != 1){
+                    $rta = 2;
+                }      
             }
             
             if($rta == 0)
             {
                 $message = "El email ingresado no se encuentra registrado.";
+                require_once (VIEWS_PATH."home.php");
+            } else if ($rta == 2){
+                $message = "El email ingresado no se encuentra activo.";
                 require_once (VIEWS_PATH."home.php");
             }
 

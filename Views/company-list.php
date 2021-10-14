@@ -15,7 +15,7 @@
     <div class="content" style="width:100%"> 
         <form style="width:100%" action= <?php echo FRONT_ROOT ?>Company/SearchFilter method="post">
             <div style="width:70%">
-              <input type="text" name="word" size="" placeholder="Ingrese una palabra" value=""> 
+              <input type="text" name="word" size="" placeholder="Ingrese una descripción" value=""> 
             </div>
             <div style="width:30% ">
               <input type="submit" class="btn" value="BUSCAR" name="search"></input>  
@@ -51,7 +51,7 @@
                    <td><?php echo $company->getDescription() ?></td>
                    <td><?php echo $company->getAboutUs() ?></td>
                    <td><?php echo $company->getCompanyLink() ?></td>  
-                   <td><?php echo $company->getActive() ?></td>  
+                   <td><?php if($company->getActive() == 1){ echo "Activo"; } else { echo "Inactivo"; }?></td> 
                    <td><button type="submit" class="btn" value="<?php echo $company->getCompanyId()?>" name="view"> Ver </button></td>
                    
                    <!-- <td><button type="submit" class="btn" value="<?php echo $company->getCompanyId()?>" name="remove"> Eliminar </button></td> -->

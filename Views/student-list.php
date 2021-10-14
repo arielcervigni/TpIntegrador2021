@@ -27,9 +27,11 @@
             <tr>
               <th style="width: 15%;">First Name</th>
               <th style="width: 30%;">Last Name</th>
-              <th style="width: 30%;">Dni</th>
+              <th style="width: 15%;">Dni</th>
               <th style="width: 15%;">Email</th>
-              <th style="width: 10%;">Phone Number</th>
+              <th style="width: 15%;">Phone Number</th>
+              <th style="width: 10%;">Active</th>
+
             </tr>
           </thead>
           <tbody>
@@ -45,14 +47,15 @@
                    <td><?php echo $student->getLastName() ?></td>
                    <td><?php echo $student->getDni() ?></td>
                    <td><?php echo $student->getEmail() ?></td>
-                   <td><?php echo $student->getPhoneNumber() ?></td>             
+                   <td><?php echo $student->getPhoneNumber() ?></td>   
+                   <td><?php if($student->getActive() == 1){ echo "Activo"; } else { echo "Inactivo"; }?></td>            
                    </tr>
                 <?php
                    }
                 ?>        
           </tbody>
         </table>
-        <input onclick="location.href='ShowAddView'" type="button" class="btn" value="ADD" style="background-color:#DC8E47;color:white;"/>
+        <!-- <input onclick="location.href='ShowAddView'" type="button" class="btn" value="ADD" style="background-color:#DC8E47;color:white;"/> -->
         </form> 
       </div>
       <?php 

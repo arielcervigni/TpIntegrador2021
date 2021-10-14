@@ -56,10 +56,10 @@
               </tbody>
           </table>
           <div>
+            
           <?php if ($_SESSION["loggeduser"]->getProfile() == "Administrador") { ?>
             <input type="submit" class="btn" value="MODIFICAR" style="background-color:#DC8E47;color:white;"/>
-            <?php } ?>
-            <input onclick="location.href='ShowListView'"  type="submit" class="btn" value="VER LISTA" style="background-color:#DC8E47;color:white;"/> 
+            <?php } ?> 
           </div>
         </form>
         <?php if ($_SESSION["loggeduser"]->getProfile() == "Administrador") { ?>   
@@ -68,6 +68,8 @@
           <input type="submit" class="btn" value="ELIMINAR" style="background-color:#DC8E47;color:white;"/>
       </form>
         <?php } ?>
+
+        <input onclick="location.href='ShowListView'"  type="submit" class="btn" value="VER LISTA" style="background-color:#DC8E47;color:white;"/>
       </div>
       
       

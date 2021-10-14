@@ -1,18 +1,10 @@
 [
     {
-        "companyId": 1,
-        "cuit": "123",
-        "description": "d",
-        "aboutUs": "a",
-        "companyLink": "l",
-        "active": true
-    },
-    {
         "companyId": 2,
-        "cuit": "2",
-        "description": "1",
-        "aboutUs": "1",
-        "companyLink": "1",
+        "cuit": "22",
+        "description": "11",
+        "aboutUs": "11",
+        "companyLink": "11",
         "active": true
     },
     {
