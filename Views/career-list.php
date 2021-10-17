@@ -39,6 +39,16 @@
           <tbody>
                 <?php
                    //var_dump($careerList);
+                   if($_SESSION["loggeduser"]->getProfile() != "Administrador"){
+                     $companyListActive = array();
+                      foreach($careerList as $career)
+                      {
+                        if($career->getActive() == 1)
+                          array_push($companyListActive,$career);
+                      }
+                      $careerList = $companyListActive;
+                   }
+                     
                    foreach ($careerList as $career)
                    {
                 ?>       
@@ -54,7 +64,7 @@
           </tbody>
         </table>
         <?php if($_SESSION["loggeduser"]->getProfile() == "Administrador") {?>
-          <input onclick="location.href='ShowAddView'" type="button" class="btn" value="AGREGAR" style="background-color:#DC8E47;color:white;"/>
+          <!-- <input onclick="location.href='ShowAddView'" type="button" class="btn" value="AGREGAR" style="background-color:#DC8E47;color:white;"/> -->
         <?php }?>  
       </form> 
       </div>

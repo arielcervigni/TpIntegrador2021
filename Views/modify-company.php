@@ -7,8 +7,8 @@
   <div class="overlay">
     <div id="breadcrumb" class="clear"> 
       <ul>
-        <li><a href="<?php echo FRONT_ROOT ?>Company/ShowAddView">Add Company</a></li> 
-        <li><a href="<?php echo FRONT_ROOT ?>Company/ShowListView">Company List/Remove</a></li>
+        <li><a href="<?php echo FRONT_ROOT ?>ManageCompany/ShowAddView">Add Company</a></li> 
+        <li><a href="<?php echo FRONT_ROOT ?>ManageCompany/ShowListView">Company List/Remove</a></li>
         <li><a href="<?php echo FRONT_ROOT ?>Student/ShowListView">LIST/REMOVE</a></li>
         <li><a href="<?php echo FRONT_ROOT ?>Home/Index">CLOSE</a></li>
       </ul>
@@ -27,8 +27,8 @@
               echo $message;
           }
         ?>  
-        
-        <form action=<?php echo FRONT_ROOT ?>Company/Modify method="post"  style="background-color: #EAEDED;padding: 2rem !important;">
+        <br>
+        <form action=<?php echo FRONT_ROOT ?>ManageCompany/Modify method="post"  style="background-color: #EAEDED;padding: 2rem !important;">
         <table> 
             <tbody align="center">
             

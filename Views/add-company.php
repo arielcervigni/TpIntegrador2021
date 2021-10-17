@@ -7,8 +7,8 @@
   <div class="overlay">
     <div id="breadcrumb" class="clear"> 
       <ul>
-        <li><a href="<?php echo FRONT_ROOT ?>Company/ShowAddView">Add Company</a></li> 
-        <li><a href="<?php echo FRONT_ROOT ?>Company/ShowListView">Company List/Remove</a></li>
+        <li><a href="<?php echo FRONT_ROOT ?>ManageCompany/ShowAddView">Add Company</a></li> 
+        <li><a href="<?php echo FRONT_ROOT ?>ManageCompany/ShowListView">Company List/Remove</a></li>
         <li><a href="<?php echo FRONT_ROOT ?>Student/ShowListView">LIST/REMOVE</a></li>
         <li><a href="<?php echo FRONT_ROOT ?>Home/Index">CLOSE</a></li>
       </ul>
@@ -29,7 +29,7 @@
           
         ?>  
         
-        <form action=<?php echo FRONT_ROOT ?>Company/AddIDUnico method="post"  style="background-color: #EAEDED;padding: 2rem !important;">
+        <form action=<?php echo FRONT_ROOT ?>ManageCompany/AddIDUnico method="post"  style="background-color: #EAEDED;padding: 2rem !important;">
         <table> 
             <tbody align="center">
             
@@ -39,35 +39,34 @@
                 <tr style="max-width: 100px;">
                   <div>
                     <label for="">CUIT:</label>
-                    <input type="text" name="cuit" size="11" placeholder="11 dígitos sin espacios" value="" required>
+                    <input type="text" name="cuit" size="11" placeholder="11 dígitos sin espacios" value="<?php echo $cuit?>" required>
                   </div>
                 </tr>
                 <tr>
                   <div>
                     <label for="">Descripción:</label>
-                    <input type="text" name="description" size="100" placeholder="Nombre de la empresa" value="" required>
+                    <input type="text" name="description" size="100" placeholder="Nombre de la empresa" value="<?php echo $description?>" required>
                   </div>
                 </tr>
                 <tr>
                   <div>
                     <label for="">Acerca de nosotros:</label>
-                    <input type="text" name="aboutUs" size="300" placeholder="Breve resumen de la empresa"  value="" required>
+                    <input type="text" name="aboutUs" size="300" placeholder="Breve resumen de la empresa"  value="<?php echo $aboutUs?>" required>
                   </div>
                 </tr>     
                 <tr>
                   <div>
                     <label for="">  Link de la empresa:</label>
-                    <input type="text" name="companyLink" size="" placeholder="Sitio web o Linkedin" value="" required>
+                    <input type="text" name="companyLink" size="" placeholder="Sitio web o Linkedin" value="<?php echo $companyLink?>" required>
                   </div>
                 </tr>         
               </tbody>
           </table>
           <div>
             <input type="submit" class="btn" value="AGREGAR" style="background-color:#DC8E47;color:white;"/>
-            <input onclick="location.href='ShowListView'"  type="submit" class="btn" value="VER LISTA" style="background-color:#DC8E47;color:white;"/>
-
           </div>
         </form>
+        <input onclick="location.href='ShowListView'" type="submit" class="btn" value="VER LISTA" style="background-color:#DC8E47;color:white;"/>
       </div>
         
     </div>

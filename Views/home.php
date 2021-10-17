@@ -5,6 +5,7 @@
   <header id="header" class="clear"> 
     <div id="logo" class="fl_left">
       <h1>TP Integrador 2021</h1>
+      <br>
     </div>
     <!-- <nav id="mainav" class="fl_right">
       <ul class="clear">
@@ -28,6 +29,7 @@
 </div>
 <!-- #######################################################################3 -->
 <div>
-<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et deleniti perferendis minus ipsam earum asperiores, ratione consectetur ad reprehenderit voluptates omnis, placeat ullam suscipit. Provident eius laboriosam aliquid ex dolore.<br>
+<p style="padding:3% 10%" >Lorem ipsum dolor sit amet consectetur adipisicing elit. Et deleniti perferendis minus ipsam earum asperiores, ratione consectetur ad reprehenderit voluptates omnis, placeat ullam suscipit. Provident eius laboriosam aliquid ex dolore.<br>
    Lorem ipsum dolor sit amet consectetur adipisicing elit. Et deleniti perferendis minus ipsam earum asperiores, ratione consectetur ad reprehenderit voluptates omnis, placeat ullam suscipit. Provident eius laboriosam aliquid ex dolore.</p>
 </div>
+

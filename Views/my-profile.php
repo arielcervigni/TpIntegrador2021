@@ -7,7 +7,7 @@
   <div class="overlay">
     <div id="breadcrumb" class="clear"> 
       <ul>
-        <li><a href="<?php echo FRONT_ROOT ?>Company/ShowAddView">Add Company</a></li> 
+        <li><a href="<?php echo FRONT_ROOT ?>ManageCompany/ShowAddView">Add Company</a></li> 
         <li><a href="<?php echo FRONT_ROOT ?>Student/ShowListView">LIST/REMOVE</a></li>
         <li><a href="<?php echo FRONT_ROOT ?>Home/Index">CLOSE</a></li>>
       </ul>

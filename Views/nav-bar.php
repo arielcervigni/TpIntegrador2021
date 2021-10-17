@@ -8,10 +8,10 @@
         <li class="active"><a class="drop" href="#">Menu</a>
           <ul>
           <li><a href="<?php echo FRONT_ROOT ?>Login/ShowMyProfile">MI PERFIL</a></li>
-          <li><a href="<?php echo FRONT_ROOT ?>Company/ShowListView">EMPRESAS</a></li>
+          <li><a href="<?php echo FRONT_ROOT ?>ManageCompany/ShowListView">EMPRESAS</a></li>
           <li><a href="<?php echo FRONT_ROOT ?>Career/ShowListView">CARRERAS</a></li>
           <?php if($_SESSION["loggeduser"]->getProfile() == "Administrador"){ ?>
-              <li><a href="<?php echo FRONT_ROOT ?>Company/ShowAddView">AGREGAR EMPRESA</a></li> 
+              <li><a href="<?php echo FRONT_ROOT ?>ManageCompany/ShowAddView">AGREGAR EMPRESA</a></li> 
               <li><a href="<?php echo FRONT_ROOT ?>Student/ShowListView">ESTUDIANTES</a></li>
           <?php } else { ?>
               

@@ -13,7 +13,7 @@
         ?>
     
     <div class="content" style="width:100%"> 
-        <form style="width:100%" action= <?php echo FRONT_ROOT ?>Company/SearchFilter method="post">
+        <form style="width:100%" action= <?php echo FRONT_ROOT ?>ManageCompany/SearchFilter method="post">
             <div style="width:70%">
               <input type="text" name="word" size="" placeholder="Ingrese una descripción" value=""> 
             </div>
@@ -26,7 +26,7 @@
     <div class="content"> 
       <div class="scrollable">
       
-      <form action= <?php echo FRONT_ROOT ?>Company/ShowViewView method="post">
+      <form action= <?php echo FRONT_ROOT ?>ManageCompany/ShowViewCompany method="post">
         <table style="text-align:center;">
           <thead>
             <tr>

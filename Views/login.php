@@ -5,6 +5,7 @@
   <header id="header" class="clear"> 
     <div id="logo" class="fl_left">
       <h1>Iniciar Sesión</h1>
+      <br>
     </div>
     <!-- <nav id="mainav" class="fl_right">
       <ul class="clear">
@@ -28,7 +29,7 @@
 </div>
 <!-- #######################################################################3 -->
 <div>
-  <div class="wrapper row3 img-login">
+  <div class="wrapper row3 img-login" style="padding-top:5%; padding-left:14%">
       <div class="div-login"><br>
         <h1 class="text-login">Ingresa tu email para iniciar sesión. </h1>
       </div>
