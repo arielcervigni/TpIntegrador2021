@@ -7,7 +7,7 @@
       <ul class="clear">
         <li class="active"><a class="drop" href="#">Menu</a>
           <ul>
-          <li><a href="<?php echo FRONT_ROOT ?>Student/ShowMyProfile">MI PERFIL</a></li>
+          <li><a href="<?php echo FRONT_ROOT ?>Login/ShowMyProfile">MI PERFIL</a></li>
           <li><a href="<?php echo FRONT_ROOT ?>Company/ShowListView">EMPRESAS</a></li>
           <li><a href="<?php echo FRONT_ROOT ?>Career/ShowListView">CARRERAS</a></li>
           <?php if($_SESSION["loggeduser"]->getProfile() == "Administrador"){ ?>

@@ -17,7 +17,7 @@ class CareerController
    
     public function ShowListView ($message = "")
     {
-        $careerList = $this->careerApiDAO->getCareers();
+        $careerList = $this->careerApiDAO->GetAll();
         require_once(VIEWS_PATH."career-list.php");
     }
 

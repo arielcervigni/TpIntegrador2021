@@ -4,7 +4,7 @@
 <div class="wrapper row1">
   <header id="header" class="clear"> 
     <div id="logo" class="fl_left">
-      <h1>TP Integrador 2021</h1>
+      <h1>Iniciar Sesión</h1>
     </div>
     <!-- <nav id="mainav" class="fl_right">
       <ul class="clear">
@@ -28,6 +28,25 @@
 </div>
 <!-- #######################################################################3 -->
 <div>
-<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et deleniti perferendis minus ipsam earum asperiores, ratione consectetur ad reprehenderit voluptates omnis, placeat ullam suscipit. Provident eius laboriosam aliquid ex dolore.<br>
-   Lorem ipsum dolor sit amet consectetur adipisicing elit. Et deleniti perferendis minus ipsam earum asperiores, ratione consectetur ad reprehenderit voluptates omnis, placeat ullam suscipit. Provident eius laboriosam aliquid ex dolore.</p>
+  <div class="wrapper row3 img-login">
+      <div class="div-login"><br>
+        <h1 class="text-login">Ingresa tu email para iniciar sesión. </h1>
+      </div>
+    <div class="div-login">  
+
+      <form action="<?php echo FRONT_ROOT ?>Login/login" method="post">
+          <input class="input-login" type="text" name="email" placeholder="Email" required>
+          <!-- <input class="input-login" type="password" name="password" placeholder="Contraseña" required> -->
+          <br><button class="btn-login btn" type="submit" name="">Ingresar</button><br>
+          <br>
+          <br>
+        </form>
+          <?php 
+          if (isset($message))
+            echo $message;
+          ?>
+          <br>
+          <br>
+    </div>
+  </div>
 </div>
