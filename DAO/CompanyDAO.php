@@ -1,24 +1,23 @@
 <?php
 namespace DAO;
 
-use DAO\ICompanyDAO as ICompanyDAO;
 use Models\Company as Company;
 
-class CompanyDAO implements ICompanyDAO {
+class CompanyDAO {
 
     private $companyList = array();
 
     public function getCompanyList () { return $this->companyList; }
     public function setCompanyList ($companyList) { $this->companyList = $companyList; }
 
-    function add (Company $newCompany)
+    function Add ($newCompany)
     {
         $this->retriveData();
         array_push($this->companyList, $newCompany);
         $this->saveData();
     }
 
-    function getAll()
+    function GetAll($list = "")
     {
         $this->retriveData();
         return $this->companyList;
@@ -88,6 +87,14 @@ class CompanyDAO implements ICompanyDAO {
         }
 
         return $jsonFilePath;
+    }
+
+    function Modify($id){
+        echo "";
+    }
+
+    function Remove($id){
+        echo "";
     }
 }
 

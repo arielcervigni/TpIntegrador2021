@@ -1,7 +1,7 @@
 <?php
 namespace Controllers;
 
-
+use DAO\DAOS as DAOS;
 use DAO\CareerApiDAO as CareerApiDAO;
 use Models\Career as Career;
 
@@ -11,7 +11,7 @@ class CareerController
 
     public function __construct()
     {
-        $this->careerApiDAO = new CareerApiDAO();
+        $this->careerApiDAO = DAOS::getCareerApiDAO();
     }
 
    

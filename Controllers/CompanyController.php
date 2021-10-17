@@ -2,6 +2,7 @@
 namespace Controllers;
 
 
+use DAO\DAOS as DAOS;
 use DAO\companyDAO as companyDAO;
 use Models\Company as Company;
 
@@ -11,7 +12,7 @@ class CompanyController
 
     public function __construct()
     {
-        $this->companyDAO = new CompanyDAO();
+        $this->companyDAO = DAOS::getCompanyDAO();
     }
 
     public function ShowAddView ($message = "")

@@ -1,14 +1,13 @@
 <?php
 
     namespace DAO;
-
-    use DAO\ICareerApiDAO as ICareerApiDAO;
+    
     use Models\Career as Career;
 
-    class CareerApiDAO implements ICareerApiDAO
+    class CareerApiDAO
     {
 
-        function GetCareers(){
+        function GetAll($list = ""){
 
             $get_data = $this->callAPI('GET', 'https://utn-students-api.herokuapp.com/api/Career/',false);
             $response = json_decode($get_data, true);
@@ -59,5 +58,17 @@
             curl_close($curl);
             return $result;
          }
+    }
+
+    function Add($data){
+
+    }
+
+    function Remove($id){
+
+    }
+
+    function Modify($id){
+
     }
 ?>

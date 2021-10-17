@@ -1,17 +1,21 @@
 <?php
 namespace Controllers;
 
-
+use DAO\DAOS as DAOS;
 use DAO\StudentApiDAO as StudentApiDAO;
 use Models\Student as Student;
+use DAO\CareerApiDAO as CareerApiDAO;
+use Models\Career as Career;
 
 class StudentController
 {
     private $studentApiDAO;
+    private $careerApiDAO;
 
     public function __construct()
     {
-        $this->studentApiDAO = new StudentApiDAO();
+        $this->careerApiDAO = DAOS::getCareerApiDAO();
+        $this->studentApiDAO = DAOS::getStudentApiDAO();
     }
 
     public function ShowAddView ($message = "")
@@ -22,18 +26,21 @@ class StudentController
 
     public function ShowListView ($message = "")
     {
-        $studentList = $this->studentApiDAO->GetStudents();
+        $careerList = $this->careerApiDAO->GetAll();
+        $studentList = $this->studentApiDAO->GetAll($careerList);
         require_once(VIEWS_PATH."student-list.php");
     }
 
     public function ShowMyProfile($student = null) {
+        //var_dump($student->getCareer()->getDescription());
         if($student == null && $_SESSION["loggeduser"] != null)
             $student = $_SESSION["loggeduser"];
         require_once(VIEWS_PATH."my-profile.php");
     }
 
     function login ($email) {
-        $studentList = $this->studentApiDAO->GetStudents();
+        $careerList = $this->careerApiDAO->GetAll();
+        $studentList = $this->studentApiDAO->GetAll($careerList);
         $rta = 0;
         if(count($studentList) > 0){
             foreach ($studentList as $student){

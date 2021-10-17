@@ -21,16 +21,18 @@
     <!-- main body -->
     <div class="content"> 
       <div class="scrollable">
-      <form action= <?php echo FRONT_ROOT ?>Cellphone/RemoveItem method="post">
+      <!-- <form action= <?php echo FRONT_ROOT ?>Cellphone/RemoveItem method="post"> -->
+      <form>
         <table style="text-align:center;">
           <thead>
             <tr>
               <th style="width: 15%;">First Name</th>
-              <th style="width: 30%;">Last Name</th>
+              <th style="width: 20%;">Last Name</th>
               <th style="width: 15%;">Dni</th>
               <th style="width: 15%;">Email</th>
               <th style="width: 15%;">Phone Number</th>
               <th style="width: 10%;">Active</th>
+              <th style="width: 10%;">Career</th>
 
             </tr>
           </thead>
@@ -48,7 +50,8 @@
                    <td><?php echo $student->getDni() ?></td>
                    <td><?php echo $student->getEmail() ?></td>
                    <td><?php echo $student->getPhoneNumber() ?></td>   
-                   <td><?php if($student->getActive() == 1){ echo "Activo"; } else { echo "Inactivo"; }?></td>            
+                   <td><?php if($student->getActive() == 1){ echo "Activo"; } else { echo "Inactivo"; }?></td>   
+                   <td><?php echo $student->getCareer()->getDescription() ?> </td>         
                    </tr>
                 <?php
                    }

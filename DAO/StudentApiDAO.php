@@ -2,13 +2,13 @@
 
     namespace DAO;
 
-    use DAO\IStudentApiDAO as IStudentApiDAO;
     use Models\Student as Student;
+    use Models\Career as Career;
 
-    class StudentApiDAO implements IStudentApiDAO
+    class StudentApiDAO
     {
 
-        function GetStudents(){
+        function GetAll($list){
 
             $get_data = $this->callAPI('GET', 'https://utn-students-api.herokuapp.com/api/Student/',false);
             $response = json_decode($get_data, true);
@@ -17,8 +17,11 @@
             $studentList = array();
             foreach ($response as $studentAPI){
                $student = new Student();
+               $career = new Career();
+
                $student->setStudentId($studentAPI['studentId']);
-               $student->setcareerId($studentAPI['careerId']);
+               $career = $this->searchInArray($list, $studentAPI['careerId']);
+               $student->setCareer($career);
                $student->setFirstName($studentAPI['firstName']);
                $student->setLastName($studentAPI['lastName']);
                $student->setDni($studentAPI['dni']);
@@ -29,18 +32,22 @@
                $student->setPhoneNumber($studentAPI['phoneNumber']);
                $student->setActive($studentAPI['active']);
                $student->setProfile("Student");
+
                array_push($studentList,$student);
             }
 
-            array_push($studentList,$this->createUserAdmin());
+            array_push($studentList,$this->createUserAdmin($list));
             return $studentList;
             
         }
 
-        function createUserAdmin () {
+        function createUserAdmin ($careerList) {
          $student = new Student();
+         $career = new Career();
+         $career = $this->searchInArray($careerList, 1);
+
          $student->setStudentId(9999999999);
-         $student->setcareerId(1);
+         $student->setCareer($career);
          $student->setFirstName("Ariel");
          $student->setLastName("Cervigni");
          $student->setDni("37098210");
@@ -85,6 +92,27 @@
             if(!$result){die("Connection Failure");}
             curl_close($curl);
             return $result;
+         }
+
+         function searchInArray($careerList, $id) {
+            foreach ($careerList as $career){
+               if($career->getCareerId() == $id){
+                  return $career;
+               }
+            }
+            return null;
+         }
+
+         function Remove($id){
+
+         }
+
+         function Modify($id){
+
+         }
+
+         function Add($data){
+
          }
     }
 ?>

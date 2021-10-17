@@ -5,7 +5,7 @@
     class Student {
 
         private $studentId;
-        private $careerId;
+        private $career;
         private $firstName;
         private $lastName;
         private $dni;
@@ -18,7 +18,7 @@
         private $profile;
 
         public function getStudentId () { return $this->studentId; }
-        public function getCareerId () { return $this->careerId; }
+        public function getCareer () { return $this->career; }
         public function getFirstName () { return $this->firstName; }
         public function getLastName () { return $this->lastName; }
         public function getDni () { return $this->dni; }
@@ -31,7 +31,7 @@
         public function getProfile() { return $this->profile; }
 
         public function setStudentId ($studentId) { $this->studentId = $studentId; }
-        public function setCareerId ($careerId) { $this->careerId = $careerId; }
+        public function setCareer ($career) { $this->career = $career; }
         public function setFirstName ($firstName) { $this->firstName = $firstName; }
         public function setLastName ($lastName) { $this->lastName = $lastName; }
         public function setDni ($dni) { $this->dni = $dni; }

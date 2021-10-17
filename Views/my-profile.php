@@ -30,8 +30,8 @@
                 <input style="width:100%" type="number" name="studentId" size="11" value="<?php echo $student->getStudentId() ?>" disabled>
               </td>
               <td>
-                <label for="">ID de Carrera:</label>
-                <input style="width:100%" type="number" name="careerId" size="11" value="<?php echo $student->getCareerId() ?>" disabled>
+                <label for="">Carrera:</label>
+                <input style="width:100%" type="text" name="career" size="11" value="<?php echo $student->getCareer()->getDescription() ?>" disabled>
               </td>
             </tr> 
 
@@ -82,7 +82,7 @@
             <tr style="max-width: 50px;">
               <td>
                 <label for="">Activo:</label>
-                <input style="width:100%" type="text" name="active" value="<?php if($student->getActive() == 1) echo "Si"; else echo "No"; ?>" disabled>
+                <input style="width:100%" type="text" name="active" value="<?php if($student->getActive() == 1) echo "Activo"; else echo "Inactivo"; ?>" disabled>
               </td>
               <td>
                 <label for="">Perfil:</label>
