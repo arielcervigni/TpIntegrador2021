@@ -2,81 +2,68 @@
  include('header.php');
  include('nav-bar.php');
 ?>
-<!-- ################################################################################################ 
-<div class="wrapper row2 bgded" style="background-image:url('../images/demo/backgrounds/1.png');">
-  <div class="overlay">
-    <div id="breadcrumb" class="clear"> 
-      <ul>
-        <li><a href="<?php echo FRONT_ROOT ?>ManageCompany/ShowAddView">Add Company</a></li> 
-        <li><a href="<?php echo FRONT_ROOT ?>ManageCompany/ShowListView">Company List/Remove</a></li>
-        <li><a href="<?php echo FRONT_ROOT ?>Student/ShowListView">LIST/REMOVE</a></li>
-        <li><a href="<?php echo FRONT_ROOT ?>Home/Index">CLOSE</a></li>
-      </ul>
-    </div>
-  </div>
-</div>
-<!-- ################################################################################################ -->
-<div class="wrapper row4">
-<main class="container clear"> 
-    <div class="content"> 
-      <div id="comments" >
-        <h2>EMPRESA</h2>
-      
-        <form action=<?php echo FRONT_ROOT ?>ManageCompany/ShowModifyView method="post"  style="background-color: #EAEDED;padding: 2rem !important;">
-        <table> 
-            <tbody align="center">
-            
 
-            <input type="hidden" name="companyId" value="<?php echo $companyId ?>">
 
-                <tr style="max-width: 100px;">
-                  <div>
-                    <label for="">CUIT:</label>
-                    <input type="text" name="cuit" size="11" placeholder="11 dígitos sin espacios" value="<?php echo $cuit ?>" disabled>
-                  </div>
-                </tr>
-                <tr>
-                  <div>
-                    <label for="">Descripción:</label>
-                    <input type="text" name="description" size="100" placeholder="Nombre de la empresa" value="<?php echo $description ?>" disabled>
-                  </div>
-                </tr>
-                <tr>
-                  <div>
-                    <label for="">Acerca de nosotros:</label>
-                    <input type="text" name="aboutUs" size="300" placeholder="Breve resumen de la empresa"  value="<?php echo $aboutUs ?>"disabled>
-                  </div>
-                </tr>     
-                <tr>
-                  <div>
-                    <label for="">  Link de la empresa:</label>
-                    <input type="text" name="companyLink" size="" placeholder="Sitio web o Linkedin" value="<?php echo $companyLink ?>" disabled>
-                  </div>
-                </tr>         
-              </tbody>
-          </table>
-          <div>
-            
-          <?php if ($_SESSION["loggeduser"]->getProfile() == "Administrador") { ?>
-            <input type="submit" class="btn" value="MODIFICAR" style="background-color:#DC8E47;color:white;"/>
-            <?php } ?> 
+<main class="mx-auto h-75">
+     <section id="listado" class="mb-5">
+          <div class="container">
+               <h2 class="mb-4">Visualizar Empresa</h2>
+               <form action="<?php echo FRONT_ROOT . 'ManageCompany/ShowListView' ?>" method="POST" class="bg-dark-alpha p-5">
+                    <div class="row justify-content-start">
+                    <?php
+                         if(isset($message) && !empty($message))
+                         {
+                              ?>
+                              <div class="container">
+                                   <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                        <?php echo $message ?>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                             <span aria-hidden="true">&times;</span>
+                                        </button>
+                                   </div>
+                              </div>
+                              <?php
+                         } 
+                    ?>
+                    
+                         <div class="col-lg-12">
+                              <div class="form-group">
+                                   <label for="">Cuit:</label>
+                                   <br>
+                                   <input style="width:100%;" type="text" name="cuit" size="11" placeholder="11 dígitos sin espacios" value="<?php echo $cuit?>" disabled>
+                              </div>
+                              
+                         </div>
+
+                         <div class="col-lg-12">
+                              <div class="form-group ">
+                                   <label for="">Descripción:</label><br>
+                                   <input style="width:100%;" type="text" name="description" size="100" placeholder="Nombre de la empresa" value="<?php echo $description?>" disabled>
+                              </div>
+                         </div>
+                         
+                         <div class="col-lg-12">
+                              <div class="form-group">
+                                   <label for="">Acerca de:</label><br>
+                                   <input style="width:100%;" type="text" name="aboutUs" size="300" placeholder="Breve resumen de la empresa"  value="<?php echo $aboutUs?>" disabled>
+                              </div>
+                         </div>
+
+                         <div class="col-lg-12">
+                              <div class="form-group">
+                                   <label for="">Link de la Empresa:</label><br>
+                                   <input style="width:100%;" type="text" name="companyLink" size="" placeholder="Sitio web o Linkedin" value="<?php echo $companyLink?>" disabled>
+                              </div>
+                         </div>
+                        
+                    </div>
+                    
+                    
+                    <button type="submit" name="button" value ="" class="btn btn-primary ml-auto d-block">Lista Empresas</button>
+               </form>
           </div>
-        </form>
-        <?php if ($_SESSION["loggeduser"]->getProfile() == "Administrador") { ?>   
-        <form action=<?php echo FRONT_ROOT ?>ManageCompany/RemoveItem method="post" style="background-color: #EAEDED;padding: 2rem !important;">
-          <input type="hidden" name="companyId" value="<?php echo $companyId ?>">  
-          <input type="submit" class="btn" value="ELIMINAR" style="background-color:#DC8E47;color:white;"/>
-      </form>
-        <?php } ?>
-
-        <input onclick="location.href='ShowListView'"  type="submit" class="btn" value="VER LISTA" style="background-color:#DC8E47;color:white;"/>
-      </div>
-      
-      
-    </div>
-  </main>
-</div>
-<!-- ################################################################################################ -->
+     </section>
+</main>
 
 <?php 
   include('footer.php');

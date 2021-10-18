@@ -2,106 +2,111 @@
  include('header.php');
  include('nav-bar.php');
 ?>
-<!-- ################################################################################################ 
-<div class="wrapper row2 bgded" style="background-image:url('../images/demo/backgrounds/1.png');">
-  <div class="overlay">
-    <div id="breadcrumb" class="clear"> 
-      <ul>
-        <li><a href="<?php echo FRONT_ROOT ?>ManageCompany/ShowAddView">Add Company</a></li> 
-        <li><a href="<?php echo FRONT_ROOT ?>Student/ShowListView">LIST/REMOVE</a></li>
-        <li><a href="<?php echo FRONT_ROOT ?>Home/Index">CLOSE</a></li>>
-      </ul>
-    </div>
-  </div>
-</div>
-<!-- ################################################################################################ -->
-<div class="wrapper row4">
-  <main class="hoc container clear"> 
-  <h2>MI PERFIL</h2>
-    <!-- main body -->
-    <div class="content"> 
-      <div class="scrollable">
-     
-          <table> 
-            <tbody align="left">
-            <tr style="max-width: 50px;">
-              <td>
-                <label for="">ID de Estudiante:</label>
-                <input style="width:100%" type="number" name="studentId" size="11" value="<?php echo $student->getStudentId() ?>" disabled>
-              </td>
-              <td>
-                <label for="">Carrera:</label>
-                <input style="width:100%" type="text" name="career" size="11" value="<?php echo $student->getCareer()->getDescription() ?>" disabled>
-              </td>
-            </tr> 
 
-            <tr style="max-width: 50px;">
-              <td>
-                <label for="">Nombre:</label>
-                <input style="width:100%" type="text" name="firstName" value="<?php echo $student->getfirstName() ?>" disabled>
-              </td>
-              <td>
-                <label for="">Apellido</label>
-                <input style="width:100%" type="text" name="lastName" value="<?php echo $student->getlastName() ?>" disabled>
-              </td>
-            </tr> 
 
-            <tr style="max-width: 50px;">
-              <td>
-                <label for="">DNI:</label>
-                <input style="width:100%" type="text" name="dni" value="<?php echo $student->getDni() ?>" disabled>
-              </td>
-              <td>
-                <label for="">N° Archivo:</label>
-                <input style="width:100%" type="text" name="fileNumber" value="<?php echo $student->getFileNumber() ?>" disabled>
-              </td>
-            </tr> 
+<main class="mx-auto h-75">
+     <section id="listado" class="mb-5">
+          <div class="container">
+               <h2 class="mb-4">Mi Perfil </h2>
+               <form action="" method="POST" class="bg-dark-alpha p-5">
+                    <div class="row justify-content-start">
 
-            <tr style="max-width: 50px;">
-              <td>
-                <label for="">Genero:</label>
-                <input style="width:100%" type="text" name="gendre" value="<?php echo $student->getGender() ?>" disabled>
-              </td>
-              <td>
-                <label for="">Fecha de Nacimiento:</label>
-                <input style="width:100%" type="text" name="birthDate" value="<?php echo $student->getBirthDate() ?>" disabled>
-              </td>
-            </tr> 
+                         <div class="col-lg-6">
+                              <div class="form-group">
+                                   <label for="">Id Estudiante:</label>
+                                   <br>
+                                   <input style="width:100%" type="number" name="studentId" size="11" value="<?php echo $student->getStudentId() ?>" disabled>
+                              </div>
+                         </div>
 
-            <tr style="max-width: 50px;">
-              <td>
-                <label for="">Email:</label>
-                <input style="width:100%" type="text" name="email" value="<?php echo $student->getEmail() ?>" disabled>
-              </td>
-              <td>
-                <label for="">N° Telefono:</label>
-                <input style="width:100%" type="text" name="phoneNumber" value="<?php echo $student->getPhoneNumber() ?>" disabled>
-              </td>
-            </tr> 
+                         <div class="col-lg-6">
+                              <div class="form-group ">
+                                   <label for="">Carrera:</label><br>
+                                   <input style="width:100%" type="text" name="career" size="11" value="<?php echo $student->getCareer()->getDescription() ?>" disabled>
+                              </div>
+                         </div>
+                         
+                         <div class="col-lg-6">
+                              <div class="form-group">
+                                   <label for="">Nombre:</label><br>
+                                   <input style="width:100%" type="text" name="firstName" value="<?php echo $student->getfirstName() ?>" disabled>
+                              </div>
+                         </div>
 
-            <tr style="max-width: 50px;">
-              <td>
-                <label for="">Activo:</label>
-                <input style="width:100%" type="text" name="active" value="<?php if($student->getActive() == 1) echo "Activo"; else echo "Inactivo"; ?>" disabled>
-              </td>
-              <td>
-                <label for="">Perfil:</label>
-                <input style="width:100%" type="text" name="profile" value="<?php echo $student->getProfile() ?>" disabled>
-              </td>
-            </tr> 
+                         <div class="col-lg-6">
+                              <div class="form-group">
+                                   <label for="">Apellido:</label><br>
+                                   <input style="width:100%" type="text" name="lastName" value="<?php echo $student->getlastName() ?>" disabled>
+                              </div>
+                         </div>
 
-      </tbody>
-          </table>
+                         <div class="col-lg-6">
+                              <div class="form-group">
+                                   <label for="">DNI:</label><br>
+                                   <input style="width:100%" type="text" name="dni" value="<?php echo $student->getDni() ?>" disabled>
+                              </div>
+                         </div>
 
-      
-      
-      </div>
-    </div>
-    <!-- / main body -->
-    <div class="clear"></div>
-  </main>
-</div>
+                         <div class="col-lg-6">
+                              <div class="form-group">
+                                   <label for="">N° Archivo:</label><br>
+                                   <input style="width:100%" type="text" name="fileNumber" value="<?php echo $student->getFileNumber() ?>" disabled>
+                              </div>
+                         </div>
 
+                         <div class="col-lg-6">
+                              <div class="form-group">
+                                   <label for="">Género:</label><br>
+                                   <input style="width:100%" type="text" name="gendre" value="<?php echo $student->getGender() ?>" disabled>
+                              </div>
+                         </div>
+
+                         <div class="col-lg-6">
+                              <div class="form-group">
+                                   <label for="">Fecha de Nacimiento</label><br>
+                                   <input style="width:100%" type="text" name="birthDate" value="<?php echo $student->getBirthDate() ?>" disabled>
+                              </div>
+                         </div>
+
+                         <div class="col-lg-6">
+                              <div class="form-group">
+                                   <label for="">Email:</label><br>
+                                   <input style="width:100%" type="text" name="email" value="<?php echo $student->getEmail() ?>" disabled>
+                              </div>
+                         </div>
+
+                         <div class="col-lg-6">
+                              <div class="form-group">
+                                   <label for="">N° Teléfono:</label><br>
+                                   <input style="width:100%" type="text" name="phoneNumber" value="<?php echo $student->getPhoneNumber() ?>" disabled>
+                              </div>
+                         </div>
+
+                         <div class="col-lg-6">
+                              <div class="form-group">
+                                   <label for="">Activo:</label><br>
+                                   <input style="width:100%" type="text" name="active" value="<?php if($student->getActive() == 1) echo "Activo"; else echo "Inactivo"; ?>" disabled>
+                              </div>
+                         </div>
+
+                         <div class="col-lg-6">
+                              <div class="form-group">
+                                   <label for="">Perfil:</label><br>
+                                   <input style="width:100%" type="text" name="profile" value="<?php echo $student->getProfile() ?>" disabled>
+                              </div>
+                         </div>
+                        
+                         
+                         
+                    </div>
+</form> 
+          </div>
+     </section>
+</main>
+<br><br><br><br><br><br>
 <?php 
+  
   include('footer.php');
 ?>
+
+    
