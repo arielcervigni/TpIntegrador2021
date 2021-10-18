@@ -12,13 +12,10 @@
         echo $message;
         ?>
     
-    <div class="content" style="width:100%"> 
-        <form style="width:100%" action= <?php echo FRONT_ROOT ?>ManageCompany/SearchFilter method="post">
-            <div style="width:70%">
-              <input type="text" name="word" size="" placeholder="Ingrese una descripción" value=""> 
-            </div>
-            <div style="width:30% ">
-              <input type="submit" class="btn" value="BUSCAR" name="search"></input>  
+    <div style="width:100%;"> 
+        <form style="width:100%;" action= <?php echo FRONT_ROOT ?>ManageCompany/SearchFilter method="post">
+            <div style="width:100%;">
+              <input style="width:80%; margin-rigth:5%;" type="text" name="word" size="" placeholder="Ingrese una descripción" value=""><input style="width:15%;" type="submit" class="btn" value="BUSCAR" name="search"></input>  
             </div>
         </form>
       </div>

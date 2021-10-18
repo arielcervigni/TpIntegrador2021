@@ -20,7 +20,7 @@
 <main class="container clear"> 
     <div class="content"> 
       <div id="comments" >
-        <h2>AGREGAR UNA NUEVA EMPRESA</h2>
+        <h2>MODIFICAR UNA EMPRESA</h2>
 
         <?php 
           if(isset($message)){
@@ -63,11 +63,10 @@
           </table>
           <div>
             <input type="submit" class="btn" value="GUARDAR CAMBIOS" style="background-color:#DC8E47;color:white;"/>
-  
-            <input onclick="location.href='ShowListView'"  type="submit" class="btn" value="VER LISTA" style="background-color:#DC8E47;color:white;"/>
-
+            <input onclick="location.href='ShowListView'"  type="button" class="btn" value="VER LISTA" style="background-color:#DC8E47;color:white;"/>
           </div>
         </form>
+       
       </div>
         
     </div>
