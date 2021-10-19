@@ -78,8 +78,8 @@ class ManageCompanyController
         
         $companyList = $this->companyDAO->getAll();
         $companyPos = $this->searchPositionAtId($companyList, $companyId);
-        
-        $verifyCompany = $this->verifyNewCompany($companyList, $cuit, $description, $companyLink);
+        // acá tengo que pasarle el id de la empresa así se si el id == $company->getID() se está editando a si misma.
+        $verifyCompany = $this->verifyNewCompany($companyList, $cuit, $description, $companyLink, $companyId);
                 //var_dump($verifyCompany);
 
         if($verifyCompany == "OK"){
@@ -116,7 +116,7 @@ class ManageCompanyController
 
         if($companyId > 0){
 
-            $verifyCompany = $this->verifyNewCompany($companyList, $cuit, $description, $companyLink);
+            $verifyCompany = $this->verifyNewCompany($companyList, $cuit, $description, $companyLink, $companyId);
                 //var_dump($verifyCompany);
 
                 if($verifyCompany == "OK"){
@@ -213,16 +213,16 @@ class ManageCompanyController
         require_once(VIEWS_PATH."company-list.php");
     }
 
-    private function verifyNewCompany($companyList, $cuit, $description, $companyLink) {
+    private function verifyNewCompany($companyList, $cuit, $description, $companyLink, $companyId) {
         foreach ($companyList as $company)
         {
-            if($company->getCuit() == $cuit)
+            if($company->getCuit() == $cuit && $company->getCompanyId() != $companyId)
                 return "CUIT";
 
-            if($company->getDescription() == $description)
+            if($company->getDescription() == $description && $company->getCompanyId() != $companyId)
                 return "DESCRIPTION";
 
-            if($company->getCompanyLink() == $companyLink)
+            if($company->getCompanyLink() == $companyLink && $company->getCompanyId() != $companyId)
                 return "COMPANYLINK";
 
         }

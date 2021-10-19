@@ -1,6 +1,6 @@
 <?php 
     include_once('header.php');
-    include ('nav-bar.php');
+    include('nav-bar.php');
 ?>
 
 

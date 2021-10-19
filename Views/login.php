@@ -3,6 +3,7 @@
     include('nav-bar.php');
 ?>
 
+
 <main class="">
   <div class="container text-center table loginTable  w-100" style="padding:0px;">
 
@@ -40,6 +41,8 @@
       }
       ?>
       <button class="btn btn-primary w-50 loginBoton" type="submit">Iniciar Sesión</button>
+      
+      
       <br>
     </form>
     

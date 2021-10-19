@@ -93,7 +93,7 @@ nav div a span {
 #userIcon {
   text-align: center;
   font-size: 8vh;
-  color: #ffffff;
+  color: #000000;
 }
 
 .loginTable {
@@ -138,7 +138,7 @@ form {
 
 .logInInputs,
 .logInInputs:focus {
-  color: #ffffff;
+  color: #000000;
   background-color: transparent;
   border: none;
   border-bottom: 2px solid #000000;
@@ -147,12 +147,12 @@ form {
 
 .logInInputs::placeholder {
   /* Most modern browsers support this now. */
-  color: #ffffff;
+  color: #000000;
   font-size: 0.8em;
 }
 
 .inputLogin:focus {
-  border: 1px solid #ffffff;
+  border: 1px solid #000000;
 }
 
 .loginInputContainer {
@@ -167,13 +167,13 @@ form {
 }
 
 .loginBoton {
-  color: #ffffff;
+  color: #000000;
   background-color: #000000;
   border: 1px solid #000000;
 }
 
 .loginBoton:hover {
-  color: #ffffff;
+  color: #000000;
   background-color: transparent;
   border: 1px solid white;
 }

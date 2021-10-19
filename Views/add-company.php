@@ -1,7 +1,12 @@
 <?php 
- include('header.php');
- include('nav-bar.php');
+
+if(!isset($_SESSION["loggeduser"])){
+     require_once(VIEWS_PATH."error.php");
+ } else {
+     include('header.php');
+     include('nav-bar.php');
 ?>
+
 
 <main class="mx-auto h-75">
      <section id="listado" class="mb-5">
@@ -68,4 +73,5 @@
 
 <?php 
   include('footer.php');
+ }
 ?>
