@@ -2,29 +2,31 @@
  include('header.php');
  include('nav-bar.php');
 ?>
-<!-- ################################################################################################ 
-<div class="wrapper row2 bgded" style="background-image:url('../images/demo/backgrounds/1.png');">
-  <div class="overlay">
-    <div id="breadcrumb" class="clear"> 
-      <ul>
-        <li><a href="<?php echo FRONT_ROOT ?>ManageCompany/ShowAddView">Add Company</a></li> 
-        <li><a href="<?php echo FRONT_ROOT ?>Student/ShowListView">LIST/REMOVE</a></li>
-        <li><a href="<?php echo FRONT_ROOT ?>Home/Index">CLOSE</a></li>>
-      </ul>
-    </div>
-  </div>
-</div>
-<!-- ################################################################################################ -->
-<div class="wrapper row4">
-  <main class="hoc container clear"> 
-  <h2>LISTA DE ESTUDIANTES</h2>
-    <!-- main body -->
-    <div class="content"> 
-      <div class="scrollable">
-      <!-- <form action= <?php echo FRONT_ROOT ?>Cellphone/RemoveItem method="post"> -->
-      <form>
-        <table style="text-align:center;">
-          <thead>
+
+<main class="mx-auto">
+     <section id="listado" class="mb-5">
+          
+          <div class="container py-3">
+          <h2 class="mb-4">Estudiantes </h2>
+               <table id="dt-vertical-scroll" class="table  table-striped bg-primary text-white" cellspacing="0">
+
+                    <?php
+                    if (isset($message) && !empty($message)) {
+                         #echo "<small>" . $message . "</small>";
+                    ?>
+                         <div class="container">
+                              <div class="alert alert-info alert-dismissible fade show" role="alert">
+                                   <?php echo $message ?>
+                                   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                   </button>
+                              </div>
+                         </div>
+                    <?php
+                    }
+                    ?>
+
+          <thead class="thead-dark">
             <tr>
               <th style="width: 15%;">First Name</th>
               <th style="width: 20%;">Last Name</th>
@@ -58,18 +60,13 @@
                 ?>        
           </tbody>
         </table>
-        <!-- <input onclick="location.href='ShowAddView'" type="button" class="btn" value="ADD" style="background-color:#DC8E47;color:white;"/> -->
-        </form> 
-      </div>
-      <?php 
-      if (isset($message))
-        echo $message;
-        ?>
-    </div>
-    <!-- / main body -->
-    <div class="clear"></div>
-  </main>
-</div>
+          </div>
+          <!-- <div class="container" style="display:flex; justify-content:flex-start">
+               <a type="button" class="btn btn-light" href="<?php echo FRONT_ROOT . 'Student/Add' ?>">Listado de Cines</a>
+          </div> -->
+     </section>
+
+     <main>
 
 <?php 
   include('footer.php');

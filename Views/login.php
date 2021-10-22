@@ -1,53 +1,75 @@
 <?php 
     include_once('header.php');
+    // include('nav-bar.php');
 ?>
-<div class="wrapper row1">
-  <header id="header" class="clear"> 
-    <div id="logo" class="fl_left">
-      <h1>Iniciar Sesión</h1>
-      <br>
-    </div>
-    <!-- <nav id="mainav" class="fl_right">
-      <ul class="clear">
-        <li class="active"><a class="drop" href="#">Actions</a>
-          <ul>
-            <li><a href="">ADD</a></li>
-            <li><a href="">LIST/REMOVE</a></li>
-      </ul>
-    </nav> -->
-  </header>
-</div>
-<div class="wrapper row2 bgded" style="background-image:url('../images/demo/backgrounds/1.png');">
-  <div class="overlay">
-    <div id="breadcrumb" class="clear"> 
-      <ul>
-        <li><a href="<?php echo FRONT_ROOT ?>Home/Index">Bienvenido</a></li> 
-        <li><a href="<?php echo FRONT_ROOT ?>Login/ShowLogin">Iniciar Sesión</a></li> 
-      </ul>
-    </div>
-  </div>
-</div>
-<!-- #######################################################################3 -->
-<div>
-  <div class="wrapper row3 img-login" style="padding-top:5%; padding-left:14%">
-      <div class="div-login"><br>
-        <h1 class="text-login">Ingresa tu email para iniciar sesión. </h1>
-      </div>
-    <div class="div-login">  
+<nav class="navbar navbar-expand-lg navbar-dark primary-color">
 
-      <form action="<?php echo FRONT_ROOT ?>Login/login" method="post">
-          <input class="input-login" type="text" name="email" placeholder="Email" required>
-          <!-- <input class="input-login" type="password" name="password" placeholder="Contraseña" required> -->
-          <br><button class="btn-login btn" type="submit" name="">Ingresar</button><br>
-          <br>
-          <br>
-        </form>
-          <?php 
-          if (isset($message))
-            echo $message;
-          ?>
-          <br>
-          <br>
-    </div>
+<div class="container">
+  <!-- Navbar brand -->
+  <a class="navbar-brand js-scroll-trigger" href="<?php  echo FRONT_ROOT . "Home/Index"   ?>">
+    <i class="fas fa-book-reader"></i><span class="nameHeader text-white">Ofertas Laborales</span>
+  </a>
+
+  <!-- Collapse button -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+    aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <!-- Collapsible content -->
+  <div class="collapse navbar-collapse" id="basicExampleNav">
+
+    <!-- Links -->
+    <ul class="navbar-nav ml-auto">
+  
+      
+      <li class="nav-item">
+        <a class="nav-link" href="<?php echo FRONT_ROOT. "Login/ShowLogin"?>">Iniciar Sesión</a>
+      </li>
+
+    </ul>
   </div>
-</div>
+</nav>
+
+<main class="">
+  <div class="container text-center table loginTable  w-100" style="padding:0px;">
+
+    <form action="<?php echo FRONT_ROOT . 'Login/login' ?>" method="POST" class="login-form bg-dark-alpha p-5 mx-auto text-white">
+
+      <div class="form-group" text-align="center">
+        <div class="col userIconCol">
+          <span id="userIcon"><i class="far fa-user"></i></span>
+        </div>
+      </div>
+
+      <div class="form-group inputContainer">
+        <input type="text" name="username" class="form-control form-control-lg logInInputs" placeholder="Ingrese su email">
+
+      </div>
+
+
+      <!-- <div class="form-group inputContainer">
+        <input type="password" name="password" class="form-control form-control-lg logInInputs" placeholder="Ingrese constraseña">
+
+      </div> -->
+      <?php
+      if (isset($message) && !empty($message)) {
+        #echo "<small>" . $message . "</small>";
+      ?>
+        <div class="container">
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <?php echo $message ?>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </div>
+      <?php
+      }
+      ?>
+      <button class="btn btn-primary w-50 loginBoton" type="submit">Iniciar Sesión</button>
+      <br>
+    </form>
+    
+  </div>
+</main>

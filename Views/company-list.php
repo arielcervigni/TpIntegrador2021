@@ -3,37 +3,47 @@
  include('nav-bar.php');
 ?>
 
-<div class="wrapper row4">
-  <main class="hoc container clear"> 
-    <!-- main body -->
-    <h2>LISTA DE EMPRESAS: </h2>
-    <?php 
-      if (isset($message))
-        echo $message;
-        ?>
-    
-    <div style="width:100%;"> 
-        <form style="width:100%;" action= <?php echo FRONT_ROOT ?>ManageCompany/SearchFilter method="post">
-            <div style="width:100%;">
-              <input style="width:80%; margin-rigth:5%;" type="text" name="word" size="" placeholder="Ingrese una descripción" value=""><input style="width:15%;" type="submit" class="btn" value="BUSCAR" name="search"></input>  
-            </div>
-        </form>
-      </div>
+<main class="mx-auto">
+<div> 
+     <section id="listado" class="mb-5">
+          
+          <div class="container py-3">
+          <h2 class="mb-4">Empresas </h2>
+          <form action= <?php echo FRONT_ROOT ?>ManageCompany/SearchFilter method="post">
+            <div class="input-group mb-3">
+              <input type="text" name="word" class="form-control" placeholder="Ingrese una descripción para buscar" aria-label="" aria-describedby="basic-addon2">
+            <!-- <div class="input-group-append"> -->
+              <button class="btn btn-primary btn-sm" type="submit">Buscar</button>
+            <!-- </div> -->
+          </form>
+          </div>
+               <table id="dt-vertical-scroll" class="table  table-striped bg-primary text-white" cellspacing="0">
 
-    <div class="content"> 
-      <div class="scrollable">
-      
-      <form action= <?php echo FRONT_ROOT ?>ManageCompany/ShowViewCompany method="post">
-        <table style="text-align:center;">
-          <thead>
+               <?php
+                         if(isset($message) && !empty($message))
+                         {
+                              ?>
+                              <div class="container">
+                                   <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                        <?php echo $message ?>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                             <span aria-hidden="true">&times;</span>
+                                        </button>
+                                   </div>
+                              </div>
+                              <?php
+                         } 
+                    ?>
+
+          <thead class="thead-dark">
             <tr>
-              <th style="width: 5%;">CompanyID</th>
-              <th style="width: 15%;">Cuit</th>
-              <th style="width: 25%;">Descripcion</th>
-              <th style="width: 35%;">Acerca de</th>
-              <th style="width: 15%;">Link</th>
-              <th style="width: 5%;">Active</th>
-              <th style="width: 10%;">Ver</th>
+              <th>ID</th>
+              <th>Cuit</th>
+              <th style="width:40%;">Descripcion</th>
+              <th style="width:40%;">Acerca de</th>
+              <th>Link</th>
+              <th>Active</th>
+              <th colspan="3" style="text-align:center;">Acciones</th>
             </tr>
           </thead>
           <tbody>
@@ -49,29 +59,37 @@
                    <td><?php echo $company->getAboutUs() ?></td>
                    <td><?php echo $company->getCompanyLink() ?></td>  
                    <td><?php if($company->getActive() == 1){ echo "Activo"; } else { echo "Inactivo"; }?></td> 
-                   <td><button type="submit" class="btn" value="<?php echo $company->getCompanyId()?>" name="view"> Ver </button></td>
                    
-                   <!-- <td><button type="submit" class="btn" value="<?php echo $company->getCompanyId()?>" name="remove"> Eliminar </button></td> -->
-                   <!-- <td><button type="submit" class="btn" value="<?php echo $company->getCuit()?>" name="modify"> Modificar </button></td> -->
-                   
-                   <!-- <input onclick="location.href='ShowAddView'" type="button" class="btn" value="Modificar" style="background-color:#DC8E47;color:white;"/></td>               -->
+                   <td>
+                    <div class="btn-group">
+                      <form action="<?php echo FRONT_ROOT . 'ManageCompany/ShowViewCompany' ?>" method="POST">
+                      <button type="submit" value="<?php echo $company->getCompanyId() ?>" class="btn btn-light btn-sm" name="Ver">Ver</button>
+                      </form>
+                      <?php if($_SESSION["loggeduser"]->getProfile() == "Administrador") {?>
+                      <form action="<?php echo FRONT_ROOT . 'ManageCompany/ShowModifyView' ?>" method="POST">
+                        <button type="submit" value="<?php echo $company->getCompanyId() ?>" class="btn btn-warning btn-sm" name="Editar">Editar</button>
+                      </form>
+                      <form action="<?php echo FRONT_ROOT . 'ManageCompany/RemoveItem' ?>" method="POST">
+                        <button type="submit" value="<?php echo $company->getCompanyId() ?>" class="btn btn-danger btn-sm" name="Borrar">Borrar</button>
+                      </form>
+                      <?php } ?>
+                    </div>  
+                  <td> 
                    </tr>
                 <?php
                    }
                 ?>        
           </tbody>
         </table>
-        <?php if($_SESSION["loggeduser"]->getProfile() == "Administrador") {?>
-          <input onclick="location.href='ShowAddView'" type="button" class="btn" value="AGREGAR" style="background-color:#DC8E47;color:white;"/>
-        <?php }?>  
-      </form> 
-      </div>
-      
-    </div>
-    <!-- / main body -->
-    <div class="clear"></div>
-  </main>
-</div>
+          </div>
+          <?php if($_SESSION["loggeduser"]->getProfile() == "Administrador") {?>
+          <div class="container" style="display:flex; justify-content:flex-start">
+               <a type="button" class="btn btn-primary" href="<?php echo FRONT_ROOT . 'ManageCompany/ShowAddView' ?>">Agregar Empresa</a>
+          </div>
+          <?php } ?>
+     </section>
+
+     <main>
 
 <?php 
   include('footer.php');

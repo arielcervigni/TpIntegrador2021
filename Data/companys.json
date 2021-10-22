@@ -1,106 +1,26 @@
 [
     {
-        "companyId": 2,
-        "cuit": "22",
-        "description": "11",
-        "aboutUs": "11",
-        "companyLink": "11",
-        "active": true
-    },
-    {
-        "companyId": 3,
-        "cuit": "3",
-        "description": "3",
-        "aboutUs": "3",
-        "companyLink": "3",
-        "active": true
-    },
-    {
-        "companyId": 4,
-        "cuit": "4",
-        "description": "4",
-        "aboutUs": "4",
-        "companyLink": "4",
-        "active": true
-    },
-    {
-        "companyId": 6,
-        "cuit": "6",
-        "description": "6",
-        "aboutUs": "6",
-        "companyLink": "6",
+        "companyId": 1,
+        "cuit": "1111",
+        "description": "1111",
+        "aboutUs": "1111",
+        "companyLink": "1111",
         "active": true
     },
     {
         "companyId": 8,
-        "cuit": "1122",
-        "description": "1122",
-        "aboutUs": "1122",
-        "companyLink": "1122",
+        "cuit": "456",
+        "description": "456",
+        "aboutUs": "456",
+        "companyLink": "456",
         "active": true
     },
     {
         "companyId": 9,
-        "cuit": "9",
-        "description": "9",
-        "aboutUs": "9",
-        "companyLink": "9",
-        "active": true
-    },
-    {
-        "companyId": 10,
-        "cuit": "10",
-        "description": "10",
-        "aboutUs": "10",
-        "companyLink": "10",
-        "active": true
-    },
-    {
-        "companyId": 11,
-        "cuit": "20370982105",
-        "description": "Empresa de Ariel",
-        "aboutUs": "Soy mi empresa",
-        "companyLink": "www.ariel.com.ar",
-        "active": true
-    },
-    {
-        "companyId": 12,
-        "cuit": "20370982105",
-        "description": "Empresa de Ariel2",
-        "aboutUs": "Soy mi empresa2",
-        "companyLink": "www.ariel.com.ar2",
-        "active": true
-    },
-    {
-        "companyId": 13,
-        "cuit": "55",
-        "description": "55",
-        "aboutUs": "55",
-        "companyLink": "55",
-        "active": true
-    },
-    {
-        "companyId": 14,
         "cuit": "1",
         "description": "1",
         "aboutUs": "1",
         "companyLink": "1",
-        "active": true
-    },
-    {
-        "companyId": 15,
-        "cuit": "11",
-        "description": "111",
-        "aboutUs": "1",
-        "companyLink": "111",
-        "active": true
-    },
-    {
-        "companyId": 16,
-        "cuit": "112",
-        "description": "112",
-        "aboutUs": "112",
-        "companyLink": "112",
         "active": true
     }
 ]

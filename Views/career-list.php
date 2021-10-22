@@ -3,32 +3,30 @@
  include('nav-bar.php');
 ?>
 
-<div class="wrapper row4">
-  <main class="hoc container clear"> 
-    <!-- main body -->
-    <h2>LISTA DE CARRERAS: </h2>
-    <?php 
-      if (isset($message))
-        echo $message;
-        ?>
-    
-    <!-- <div class="content" style="width:100%"> 
-        <form style="width:100%" action= <?php echo FRONT_ROOT ?>Careers/SearchFilter method="post">
-            <div style="width:70%">
-              <input type="text" name="word" size="" placeholder="Ingrese una palabra" value=""> 
-            </div>
-            <div style="width:30% ">
-              <input type="submit" class="btn" value="BUSCAR" name="search"></input>  
-            </div>
-        </form>
-      </div> -->
+<main class="mx-auto">
+     <section id="listado" class="mb-5">
+          
+          <div class="container py-3">
+          <h2 class="mb-4">Carreras </h2>
+               <table id="dt-vertical-scroll" class="table  table-striped bg-primary text-white" cellspacing="0">
 
-    <div class="content"> 
-      <div class="scrollable">
-      
-      <form action= <?php echo FRONT_ROOT ?>Career/ShowViewView method="post">
-        <table style="text-align:center;">
-          <thead>
+                    <?php
+                    if (isset($message) && !empty($message)) {
+                         #echo "<small>" . $message . "</small>";
+                    ?>
+                         <div class="container">
+                              <div class="alert alert-info alert-dismissible fade show" role="alert">
+                                   <?php echo $message ?>
+                                   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                   </button>
+                              </div>
+                         </div>
+                    <?php
+                    }
+                    ?>
+
+          <thead class="thead-dark">
             <tr>
               <th style="width: 33%;">CareerID</th>
               <th style="width: 34%;">Descripcion</th>
@@ -63,17 +61,13 @@
                 ?>        
           </tbody>
         </table>
-        <?php if($_SESSION["loggeduser"]->getProfile() == "Administrador") {?>
-          <!-- <input onclick="location.href='ShowAddView'" type="button" class="btn" value="AGREGAR" style="background-color:#DC8E47;color:white;"/> -->
-        <?php }?>  
-      </form> 
-      </div>
-      
-    </div>
-    <!-- / main body -->
-    <div class="clear"></div>
-  </main>
-</div>
+          </div>
+          <!-- <div class="container" style="display:flex; justify-content:flex-start">
+               <a type="button" class="btn btn-light" href="<?php echo FRONT_ROOT . 'Student/Add' ?>">Listado de Cines</a>
+          </div> -->
+     </section>
+
+     <main>
 
 <?php 
   include('footer.php');
