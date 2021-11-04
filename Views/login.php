@@ -16,15 +16,15 @@
       </div>
 
       <div class="form-group inputContainer">
-        <input type="text" name="username" class="form-control form-control-lg logInInputs" placeholder="Ingrese su email">
+        <input type="text" name="username" class="form-control form-control-lg logInInputs" placeholder="Ingrese su email" required>
 
       </div>
 
 
-      <!-- <div class="form-group inputContainer">
-        <input type="password" name="password" class="form-control form-control-lg logInInputs" placeholder="Ingrese constraseña">
+      <div class="form-group inputContainer">
+        <input type="password" name="password" class="form-control form-control-lg logInInputs" placeholder="Ingrese constraseña" required>
 
-      </div> -->
+      </div>
       <?php
       if (isset($message) && !empty($message)) {
         #echo "<small>" . $message . "</small>";

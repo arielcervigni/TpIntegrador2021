@@ -11,12 +11,11 @@ class DAOS {
     private static $StudentApiDAO;
     private static $CareerApiDAO;
     private static $CompanyDAO;
+    private static $JobPositionApiDAO;
     private static $instance;
 
     public function __construct() {
-        $this->StudentApiDAO = new StudentApiDAO();
-        $this->CareerApiDAO = new CareerApiDAO();
-        $this->CompanyDAO = new CompanyDAO();
+        
     }
 
     static function getStudentApiDAO() {
@@ -31,6 +30,10 @@ class DAOS {
     
     static function getCompanyDAO() {
         return ((self::$CompanyDAO == null) ? self::$CompanyDAO = new CompanyDAO() : self::$CompanyDAO);
+    }
+
+    static function getJobPositionApiDAO(){
+        return ((self::$JobPositionApiDAO == null) ? self::$JobPositionApiDAO = new JobPositionApiDAO() : self::$JobPositionApiDAO);
     }
 
 }

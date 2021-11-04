@@ -11,6 +11,10 @@ define("FONTAWESOME_PATH", FRONT_ROOT.VIEWS_PATH . "fontawesome/css/all.css");
 define("MDB_PATH", FRONT_ROOT.VIEWS_PATH . "BootstrapMaterialDesign/css/mdb.min.css");
 define("LITY_PATH", FRONT_ROOT.VIEWS_PATH . "lity/");
 
+define("DB_HOST" , "localhost");
+define("DB_NAME" , "ofertaslaborales");
+define("DB_USER" , "root");
+define("DB_PASS" , "");
 
 ?>
 

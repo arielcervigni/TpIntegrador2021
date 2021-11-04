@@ -2,29 +2,27 @@
 
     namespace DAO;
     
-    use Models\Career as Career;
+    use Models\JobPosition as JobPosition;
 
-    class CareerApiDAO
+    class JobPositionApiDAO
     {
 
         function GetAll($list = ""){
 
-            $get_data = $this->callAPI('GET', 'https://utn-students-api.herokuapp.com/api/Career/',false);
+            $get_data = $this->callAPI('GET', 'https://utn-students-api.herokuapp.com/api/JobPosition/',false);
             $response = json_decode($get_data, true);
-            //$errors = $response['response']['errors'];
-            //var_dump($response);
-            $careerList = array();
-            //if(!empty($careerList)){
-               foreach ($response as $careerAPI){
-                  $career = new Career();
-                  $career->setCareerId($careerAPI['careerId']);
-                  $career->setDescription($careerAPI['description']);
-                  $career->setActive($careerAPI['active']);
-                  //var_dump($career);
-                  array_push($careerList,$career);
-               }
-            //}
-            return $careerList;
+            
+            $jobPositionList = array();
+            foreach ($response as $JobPositionAPI){
+               $jobPosition = new JobPosition();
+               $jobPosition->setJobPositionId($JobPositionAPI['jobPositionId']);
+               $jobPosition->setCareerId($JobPositionAPI['careerId']);
+               $jobPosition->setDescription($JobPositionAPI['description']);
+               //var_dump($career);
+               array_push($jobPositionList,$jobPosition);
+            }
+            var_dump($jobPositionList);
+            return $jobPositionList;
             
         }
 
@@ -59,7 +57,6 @@
             if(!$result){die("Connection Failure");}
             curl_close($curl);
             return $result;
-            
          }
     }
 

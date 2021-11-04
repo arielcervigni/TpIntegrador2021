@@ -19,14 +19,17 @@
     <!-- Links -->
     <ul class="navbar-nav ml-auto">
   
-      
+    <?php if(!isset($_SESSION["loggeduser"])) { ?> 
       <li class="nav-item">
         <a class="nav-link" href="<?php echo FRONT_ROOT. "Login/ShowLogin"?>">Iniciar Sesión</a>
       </li>
-
+      
       <!-- Dropdown -->
-      <?php if(isset($_SESSION["loggeduser"])) { ?> 
-                
+      <?php } else { ?> 
+        <li class="nav-item">
+          <a class="nav-link" href="<?php echo FRONT_ROOT ?>Home/Index">Cerrar Sesión</a>
+        </li>
+
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">Menú</a>
@@ -37,8 +40,12 @@
             <?php if($_SESSION["loggeduser"]->getProfile() == "Administrador"){ ?>
             <a class="dropdown-item" href="<?php echo FRONT_ROOT ?>ManageCompany/ShowAddView">Agregar Empresa</a>
             <a class="dropdown-item" href="<?php echo FRONT_ROOT ?>Student/ShowListView">Estudiantes</a></a>
-            <?php } ?>
-            <a class="dropdown-item" href="<?php echo FRONT_ROOT ?>Home/Index">Salir</a>
+            <a class="dropdown-item" href="<?php echo FRONT_ROOT ?>JobPosition/ShowListView">Posiciones de trabajo</a></a>
+            <a class="dropdown-item" href="<?php echo FRONT_ROOT ?>NewUser/ShowAddView">Registrar Usuario</a></a>
+            <a class="dropdown-item" href="<?php echo FRONT_ROOT ?>NewUser/ShowAdminAddView">Registrar Administrador</a></a>
+            <a class="dropdown-item" href="<?php echo FRONT_ROOT ?>NewUser/ShowListView">Mostrar Usuarios</a></a>
+              <?php } ?>
+            
           </div>
       </li>
         </li>

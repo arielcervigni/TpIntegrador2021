@@ -15,25 +15,27 @@
             //$errors = $response['response']['errors'];
             //var_dump($response);
             $studentList = array();
-            foreach ($response as $studentAPI){
-               $student = new Student();
-               $career = new Career();
+            //if(!empty($careerList)){
+               foreach ($response as $studentAPI){
+                  $student = new Student();
+                  $career = new Career();
 
-               $student->setStudentId($studentAPI['studentId']);
-               $career = $this->searchInArray($list, $studentAPI['careerId']);
-               $student->setCareer($career);
-               $student->setFirstName($studentAPI['firstName']);
-               $student->setLastName($studentAPI['lastName']);
-               $student->setDni($studentAPI['dni']);
-               $student->setFileNumber($studentAPI['fileNumber']);
-               $student->setGender($studentAPI['gender']);
-               $student->setBirthDate($studentAPI['birthDate']);
-               $student->setEmail($studentAPI['email']);
-               $student->setPhoneNumber($studentAPI['phoneNumber']);
-               $student->setActive($studentAPI['active']);
-               $student->setProfile("Student");
+                  $student->setStudentId($studentAPI['studentId']);
+                  $career = $this->searchInArray($list, $studentAPI['careerId']);
+                  $student->setCareer($career);
+                  $student->setFirstName($studentAPI['firstName']);
+                  $student->setLastName($studentAPI['lastName']);
+                  $student->setDni($studentAPI['dni']);
+                  $student->setFileNumber($studentAPI['fileNumber']);
+                  $student->setGender($studentAPI['gender']);
+                  $student->setBirthDate($studentAPI['birthDate']);
+                  $student->setEmail($studentAPI['email']);
+                  $student->setPhoneNumber($studentAPI['phoneNumber']);
+                  $student->setActive($studentAPI['active']);
+                  $student->setProfile("Student");
 
-               array_push($studentList,$student);
+                  array_push($studentList,$student);
+               //}
             }
 
             array_push($studentList,$this->createUserAdmin($list));
@@ -45,7 +47,7 @@
          $student = new Student();
          $career = new Career();
          $career = $this->searchInArray($careerList, 1);
-
+         //var_dump($career);
          $student->setStudentId(9999999999);
          $student->setCareer($career);
          $student->setFirstName("Ariel");
