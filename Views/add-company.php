@@ -7,7 +7,6 @@ if(!isset($_SESSION["loggeduser"])){
      include('nav-bar.php');
 ?>
 
-<<<<<<< HEAD
 
 <main class="mx-auto h-75">
      <section id="listado" class="mb-5">
@@ -40,39 +39,6 @@ if(!isset($_SESSION["loggeduser"])){
                               
                          </div>
 
-=======
-<main class="mx-auto h-75">
-     <section id="listado" class="mb-5">
-          <div class="container">
-               <h2 class="mb-4">Agregar Empresa</h2>
-               <form action="<?php echo FRONT_ROOT . 'ManageCompany/AddIDUnico' ?>" method="POST" class="bg-dark-alpha p-5">
-                    <div class="row justify-content-start">
-                    <?php
-                         if(isset($message) && !empty($message))
-                         {
-                              ?>
-                              <div class="container">
-                                   <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                        <?php echo $message ?>
-                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                             <span aria-hidden="true">&times;</span>
-                                        </button>
-                                   </div>
-                              </div>
-                              <?php
-                         } 
-                    ?>
-                    
-                         <div class="col-lg-12">
-                              <div class="form-group">
-                                   <label for="">Cuit:</label>
-                                   <br>
-                                   <input style="width:100%;" type="text" name="cuit" size="11" placeholder="11 dígitos sin espacios" value="<?php echo $cuit?>" required>
-                              </div>
-                              
-                         </div>
-
->>>>>>> 4819705e884678ac4f10251da54e249958e27161
                          <div class="col-lg-12">
                               <div class="form-group ">
                                    <label for="">Descripción:</label><br>

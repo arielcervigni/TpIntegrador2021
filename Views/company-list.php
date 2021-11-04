@@ -56,37 +56,21 @@
                 ?>
                           
                    <tr>
-<<<<<<< HEAD
                    <td style="vertical-align: middle;"><?php echo $company->getCompanyId() ?></td>
                    <td style="vertical-align: middle;"><?php echo $company->getCuit() ?></td>
                    <td style="vertical-align: middle;"><?php echo $company->getDescription() ?></td>
                    <td style="vertical-align: middle;"><?php echo $company->getAboutUs() ?></td>
                    <td style="vertical-align: middle;"><?php echo $company->getCompanyLink() ?></td>  
                    <td style="vertical-align: middle;"><?php if($company->getActive() == 1){ echo "Activo"; } else { echo "Inactivo"; }?></td> 
-=======
-                   <td><?php echo $company->getCompanyId() ?></td>
-                   <td><?php echo $company->getCuit() ?></td>
-                   <td><?php echo $company->getDescription() ?></td>
-                   <td><?php echo $company->getAboutUs() ?></td>
-                   <td><?php echo $company->getCompanyLink() ?></td>  
-                   <td><?php if($company->getActive() == 1){ echo "Activo"; } else { echo "Inactivo"; }?></td> 
->>>>>>> 4819705e884678ac4f10251da54e249958e27161
                    
                    <td>
                     <div class="btn-group">
                       <form action="<?php echo FRONT_ROOT . 'ManageCompany/ShowViewCompany' ?>" method="POST">
                       <button type="submit" value="<?php echo $company->getCompanyId() ?>" class="btn btn-light btn-sm" name="Ver">Ver</button>
-<<<<<<< HEAD
                     </form>
                       <?php if($_SESSION["loggeduser"]->getProfile() == "Administrador") {?>
                       <form action="<?php echo FRONT_ROOT . 'ManageCompany/ShowModifyView' ?>" method="POST">
                       <button type="submit" value="<?php echo $company->getCompanyId() ?>" class="btn btn-warning btn-sm" name="Editar">Editar</button>
-=======
-                      </form>
-                      <?php if($_SESSION["loggeduser"]->getProfile() == "Administrador") {?>
-                      <form action="<?php echo FRONT_ROOT . 'ManageCompany/ShowModifyView' ?>" method="POST">
-                        <button type="submit" value="<?php echo $company->getCompanyId() ?>" class="btn btn-warning btn-sm" name="Editar">Editar</button>
->>>>>>> 4819705e884678ac4f10251da54e249958e27161
                       </form>
                       <form action="<?php echo FRONT_ROOT . 'ManageCompany/RemoveItem' ?>" method="POST">
                         <button type="submit" value="<?php echo $company->getCompanyId() ?>" class="btn btn-danger btn-sm" name="Borrar">Borrar</button>
@@ -112,8 +96,5 @@
 
 <?php 
   include('footer.php');
-<<<<<<< HEAD
 }
-=======
->>>>>>> 4819705e884678ac4f10251da54e249958e27161
 ?>
