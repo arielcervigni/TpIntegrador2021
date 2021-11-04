@@ -13,6 +13,7 @@
           <div class="container py-3">
           <h2 class="mb-4">Carreras </h2>
                <table id="dt-vertical-scroll" class="table  table-striped bg-primary text-white" cellspacing="0">
+<<<<<<< HEAD
 
                     <?php
                     if (isset($message) && !empty($message)) {
@@ -30,6 +31,25 @@
                     }
                     ?>
 
+=======
+
+                    <?php
+                    if (isset($message) && !empty($message)) {
+                         #echo "<small>" . $message . "</small>";
+                    ?>
+                         <div class="container">
+                              <div class="alert alert-info alert-dismissible fade show" role="alert">
+                                   <?php echo $message ?>
+                                   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                   </button>
+                              </div>
+                         </div>
+                    <?php
+                    }
+                    ?>
+
+>>>>>>> 4819705e884678ac4f10251da54e249958e27161
           <thead class="thead-dark">
             <tr>
               <th style="width: 10%;">CareerID</th>

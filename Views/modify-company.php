@@ -76,5 +76,8 @@ if(!isset($_SESSION["loggeduser"])){
 
 <?php 
   include('footer.php');
+<<<<<<< HEAD
 }
+=======
+>>>>>>> 4819705e884678ac4f10251da54e249958e27161
 ?>
