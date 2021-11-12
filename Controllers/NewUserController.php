@@ -37,6 +37,8 @@ class NewUserController
         if($userId != -1){
             $user = $this->userDAO->GetUserById($userId);
         }
+
+        
         require_once(VIEWS_PATH."view-user.php");
     }
 
@@ -51,8 +53,11 @@ class NewUserController
         
     }
 
-    public function ShowModifyView($userId){
-        echo $userId;
+    public function ShowModifyView($userId, $message = ""){
+        if($message == "changePassword"){
+            $changePassword = true;
+            $message = "";
+        }
         $user = $this->userDAO->GetUserById($userId);
         require_once(VIEWS_PATH."modify-user.php");
     }

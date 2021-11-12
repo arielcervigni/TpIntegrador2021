@@ -18,7 +18,7 @@ class JobPositionController
     public function ShowListView ($message = "")
     {
         $jobPoisitionList = $this->jobPositionApiDAO->GetAll();
-        var_dump($jobPoisitionList);
+        //var_dump($jobPoisitionList);
         require_once(VIEWS_PATH."student-list.php");
     }
 

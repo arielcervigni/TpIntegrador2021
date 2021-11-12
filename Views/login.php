@@ -25,6 +25,8 @@
         <input type="password" name="password" class="form-control form-control-lg logInInputs" placeholder="Ingrese constraseña" required>
 
       </div>
+
+      <input type="hidden" name="jobOffer" value="<?php echo $jobOfferId; ?>">
       <?php
       if (isset($message) && !empty($message)) {
         #echo "<small>" . $message . "</small>";
@@ -48,3 +50,7 @@
     
   </div>
 </main>
+
+<?php 
+   include('footer.php');
+?>

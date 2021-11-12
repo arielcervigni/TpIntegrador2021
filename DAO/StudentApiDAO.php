@@ -116,5 +116,14 @@
          function Add($data){
 
          }
+
+         function GetStudentById($careerList, $studentId) {
+            $studentList = $this->GetAll($careerList);
+            $student = null;
+            foreach($studentList as $student){
+               if($student->getStudentId() == $studentId)
+                  return $student;
+            }
+         }
     }
 ?>

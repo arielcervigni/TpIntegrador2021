@@ -15,101 +15,107 @@ if(!isset($_SESSION["loggeduser"])){
                <form action="" method="POST" class="bg-dark-alpha p-5">
                     <div class="row justify-content-start">
 
+          
                          <div class="col-lg-6">
                               <div class="form-group">
                                    <label for="">Id Estudiante:</label>
                                    <br>
-                                   <input style="width:100%" type="number" name="studentId" size="11" value="<?php echo $student->getStudentId() ?>" disabled>
+                                   <input style="width:100%" type="number" name="studentId" size="11" value="<?php echo $_SESSION["loggeduser"]->getStudent()->getStudentId() ?>" disabled>
                               </div>
                          </div>
 
                          <div class="col-lg-6">
                               <div class="form-group ">
                                    <label for="">Carrera:</label><br>
-                                   <input style="width:100%" type="text" name="career" size="11" value="<?php echo $student->getCareer()->getDescription() ?>" disabled>
+                                   <input style="width:100%" type="text" name="career" size="11" value="<?php echo $_SESSION["loggeduser"]->getStudent()->getCareer()->getDescription() ?>" disabled>
                               </div>
                          </div>
                          
                          <div class="col-lg-6">
                               <div class="form-group">
                                    <label for="">Nombre:</label><br>
-                                   <input style="width:100%" type="text" name="firstName" value="<?php echo $student->getfirstName() ?>" disabled>
+                                   <input style="width:100%" type="text" name="firstName" value="<?php echo $_SESSION["loggeduser"]->getStudent()->getfirstName() ?>" disabled>
                               </div>
                          </div>
 
                          <div class="col-lg-6">
                               <div class="form-group">
                                    <label for="">Apellido:</label><br>
-                                   <input style="width:100%" type="text" name="lastName" value="<?php echo $student->getlastName() ?>" disabled>
+                                   <input style="width:100%" type="text" name="lastName" value="<?php echo $_SESSION["loggeduser"]->getStudent()->getlastName() ?>" disabled>
                               </div>
                          </div>
 
                          <div class="col-lg-6">
                               <div class="form-group">
                                    <label for="">DNI:</label><br>
-                                   <input style="width:100%" type="text" name="dni" value="<?php echo $student->getDni() ?>" disabled>
+                                   <input style="width:100%" type="text" name="dni" value="<?php echo $_SESSION["loggeduser"]->getStudent()->getDni() ?>" disabled>
                               </div>
                          </div>
 
                          <div class="col-lg-6">
                               <div class="form-group">
                                    <label for="">N° Archivo:</label><br>
-                                   <input style="width:100%" type="text" name="fileNumber" value="<?php echo $student->getFileNumber() ?>" disabled>
+                                   <input style="width:100%" type="text" name="fileNumber" value="<?php echo $_SESSION["loggeduser"]->getStudent()->getFileNumber() ?>" disabled>
                               </div>
                          </div>
 
                          <div class="col-lg-6">
                               <div class="form-group">
                                    <label for="">Género:</label><br>
-                                   <input style="width:100%" type="text" name="gendre" value="<?php echo $student->getGender() ?>" disabled>
+                                   <input style="width:100%" type="text" name="gendre" value="<?php echo $_SESSION["loggeduser"]->getStudent()->getGender() ?>" disabled>
                               </div>
                          </div>
 
                          <div class="col-lg-6">
                               <div class="form-group">
                                    <label for="">Fecha de Nacimiento</label><br>
-                                   <input style="width:100%" type="text" name="birthDate" value="<?php echo $student->getBirthDate() ?>" disabled>
+                                   <input style="width:100%" type="text" name="birthDate" value="<?php echo $_SESSION["loggeduser"]->getStudent()->getBirthDate() ?>" disabled>
                               </div>
                          </div>
 
                          <div class="col-lg-6">
                               <div class="form-group">
                                    <label for="">Email:</label><br>
-                                   <input style="width:100%" type="text" name="email" value="<?php echo $student->getEmail() ?>" disabled>
+                                   <input style="width:100%" type="text" name="email" value="<?php echo $_SESSION["loggeduser"]->getStudent()->getEmail() ?>" disabled>
                               </div>
                          </div>
 
                          <div class="col-lg-6">
                               <div class="form-group">
                                    <label for="">N° Teléfono:</label><br>
-                                   <input style="width:100%" type="text" name="phoneNumber" value="<?php echo $student->getPhoneNumber() ?>" disabled>
+                                   <input style="width:100%" type="text" name="phoneNumber" value="<?php echo $_SESSION["loggeduser"]->getStudent()->getPhoneNumber() ?>" disabled>
                               </div>
                          </div>
 
                          <div class="col-lg-6">
                               <div class="form-group">
                                    <label for="">Activo:</label><br>
-                                   <input style="width:100%" type="text" name="active" value="<?php if($student->getActive() == 1) echo "Activo"; else echo "Inactivo"; ?>" disabled>
+                                   <input style="width:100%" type="text" name="active" value="<?php if($_SESSION["loggeduser"]->getStudent()->getActive() == 1) echo "Activo"; else echo "Inactivo"; ?>" disabled>
                               </div>
                          </div>
 
                          <div class="col-lg-6">
                               <div class="form-group">
                                    <label for="">Perfil:</label><br>
-                                   <input style="width:100%" type="text" name="profile" value="<?php echo $student->getProfile() ?>" disabled>
+                                   <input style="width:100%" type="text" name="profile" value="<?php echo $_SESSION["loggeduser"]->getStudent()->getProfile() ?>" disabled>
                               </div>
                          </div>
                         
                          
                          
                     </div>
-</form> 
+               </form> 
+               
+               <form action="<?php echo FRONT_ROOT . 'NewUser/ShowModifyView' ?>" method="POST">
+                    <button type="submit" name="button" value ="<?php echo $_SESSION["loggeduser"]->getUserId()?>" class="btn btn-primary ml-auto d-block">Modificar Usuario</button>
+                    <input type="hidden" name="message" value="changePassword">
+               </form>
           </div>
      </section>
 </main>
 <br><br><br><br><br><br>
-<?php 
-  
+
+<?php
   include('footer.php');
  }
 ?>

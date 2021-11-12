@@ -27,7 +27,7 @@
       <!-- Dropdown -->
       <?php } else { ?> 
         <li class="nav-item">
-          <a class="nav-link" href="<?php echo FRONT_ROOT ?>Home/Index">Cerrar Sesión</a>
+          <a class="nav-link" href="<?php echo FRONT_ROOT ?>Home/SingOut">Cerrar Sesión</a>
         </li>
 
         <li class="nav-item dropdown">
@@ -35,16 +35,18 @@
             aria-haspopup="true" aria-expanded="false">Menú</a>
           <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
             <a class="dropdown-item" href="<?php echo FRONT_ROOT ?>Login/ShowMyProfile">Mi perfil</a>
+            <a class="dropdown-item" href="<?php echo FRONT_ROOT ?>Home/Index">Ver Ofertas Laborales</a>
+            <a class="dropdown-item" href="<?php echo FRONT_ROOT ?>Appointment/ShowListAppointments">Ver Mis Postulaciones</a>
             <a class="dropdown-item" href="<?php echo FRONT_ROOT ?>Career/ShowListView">Carreras</a>
             <a class="dropdown-item" href="<?php echo FRONT_ROOT ?>ManageCompany/ShowListView">Empresas</a>
             <?php if($_SESSION["loggeduser"]->getProfile() == "Administrador"){ ?>
             <a class="dropdown-item" href="<?php echo FRONT_ROOT ?>ManageCompany/ShowAddView">Agregar Empresa</a>
             <a class="dropdown-item" href="<?php echo FRONT_ROOT ?>Student/ShowListView">Estudiantes</a></a>
-            <a class="dropdown-item" href="<?php echo FRONT_ROOT ?>JobPosition/ShowListView">Posiciones de trabajo</a></a>
             <a class="dropdown-item" href="<?php echo FRONT_ROOT ?>NewUser/ShowAddView">Registrar Usuario</a></a>
             <a class="dropdown-item" href="<?php echo FRONT_ROOT ?>NewUser/ShowAdminAddView">Registrar Administrador</a></a>
             <a class="dropdown-item" href="<?php echo FRONT_ROOT ?>NewUser/ShowListView">Mostrar Usuarios</a></a>
-              <?php } ?>
+            <a class="dropdown-item" href="<?php echo FRONT_ROOT ?>JobOffer/ShowAddView">Agregar Oferta Laboral</a></a>
+            <?php } ?>
             
           </div>
       </li>

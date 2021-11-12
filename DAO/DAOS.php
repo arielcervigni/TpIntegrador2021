@@ -3,7 +3,8 @@ namespace DAO;
 
 use DAO\CareerApiDAO as CareerApiDAO;
 use DAO\StudentApiDAO as StudentApiDAO;
-use DAO\CompanyDAO as CompanyDAO;
+use Database\CompanyDAO as CompanyDAO;
+//use DAO\CompanyDAO as CompanyDAO;
 
 
 class DAOS {

@@ -21,13 +21,14 @@
                //var_dump($career);
                array_push($jobPositionList,$jobPosition);
             }
-            var_dump($jobPositionList);
+            //$this->SaveJobPositionInDB($jobPositionList);
+            //var_dump($jobPositionList);
             return $jobPositionList;
             
         }
 
 
-        function callAPI($method, $url, $data){
+      function callAPI($method, $url, $data){
             $curl = curl_init();
             switch ($method){
                case "POST":
@@ -57,18 +58,23 @@
             if(!$result){die("Connection Failure");}
             curl_close($curl);
             return $result;
+      }
+
+
+      function GetJobPositionById($jobPositionId){
+         
+         $jobPosition = null;
+         $jobPositionList = $this->GetAll();
+
+         foreach($jobPositionList as $item){
+            if($item->GetJobPositionId() == $jobPositionId){
+               return $item;
+            }
+              
          }
-    }
+         return $jobPosition;
+      }
+   }
 
-    function Add($data){
-
-    }
-
-    function Remove($id){
-
-    }
-
-    function Modify($id){
-
-    }
+   
 ?>
