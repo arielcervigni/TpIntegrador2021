@@ -59,6 +59,17 @@
             }
         }
 
+        public function GetAllActiveByStudentId($studentId){
+            try{
+                $con = Connection::getInstance();
+                $query = 'SELECT * FROM APPOINTMENTS WHERE studentId ='.$studentId.' AND isActive = 1';
+                $array = $con->execute($query);
+                return (!empty($array)) ? $this->mapping($array) : false;
+            }catch(PDOException $e){
+                throw $e;
+            }
+        }
+
 
         public function mapping($value){
             $value = is_array($value) ? $value : [];
@@ -87,33 +98,56 @@
 
         public function Delete ($id){
             try{
-                $query = 'UPDATE JOBOFFERS SET isActive = 0 WHERE jobOfferId = :jobOfferId;';
+                $query = 'UPDATE APPOINTMENTS SET isActive = 0 WHERE appointmentId = :appointmentId;';
                 $con = Connection::getInstance();
-                $params['jobOfferId'] = $id;
+                $params['appointmentId'] = $id;
                 $con->executeNonQuery($query, $params);
             }catch(PDOException $e){
                 echo 'Exception en Delete='.$e->getMessage();
             }
         }
 
-        public function Update($user) {
-            try{
-                $query = 'UPDATE USERS SET firstName = :firstName, lastName = :lastName, email = :email,
-                phoneNumber = :phoneNumber, pass = :password, isAdmin = :profile
-                 WHERE userId = :userId;';
+        public function Update($appointment) {
+           
+        }
+
+        public function IsAppointment ($studentId) {
+            try {
+                $query = 'SELECT a.* FROM APPOINTMENTS A 
+                          JOIN JOBOFFERS JO ON A.JOBOFFERID = JO.JOBOFFERID
+                          WHERE studentId = :studentId
+                          AND JO.ENDDATE >= NOW()
+                          AND A.ISACTIVE = 1';
                 $con = Connection::getInstance();
-                $params['userId'] = $user->getUserId();
-                $params['firstName'] = $user->getStudent()->getFirstName();
-                $params['lastName'] = $user->getStudent()->getLastName();
-                $params['email'] = $user->getStudent()->getEmail();
-                $params['phoneNumber'] = $user->getStudent()->getPhoneNumber();
-                $params['password'] = $user->getPassword();
-                $params['profile'] = $user->getProfile();
-                return $con->executeNonQuery($query, $params);
+                $params['studentId'] = $studentId;
+                $array = $con->execute($query,$params);
+                return (!empty($array)) ? $this->mapping($array) : false;
             }catch(PDOException $e){
-                echo 'Exception en Update='.$e->getMessage();
+                echo 'Exception isAppointment='.$e->getMessage();
             }
         }
 
-        
+        function GetStudentByJobOffer($jobOfferId) {
+            try {
+               $query = 'SELECT appointmentId, studentId, jobOfferId FROM APPOINTMENTS WHERE JOBOFFERID = :jobOfferId AND isActive = 1';
+               $con = Connection::getInstance();
+               $params["jobOfferId"] = $jobOfferId;
+               $array = $con->execute($query,$params);
+               return (!empty($array)) ? $this->mappingStudent($array) : false;
+            } catch(PDOException $e){
+               throw $e;
+            } 
+         }
+
+         public function mappingStudent($value){
+            $value = is_array($value) ? $value : [];
+            $resp = array_map(function($a){
+                $appointment = new Appointment();
+                $appointment->setAppointmentId($a['appointmentId']);
+                $appointment->setStudent($a['studentId']);
+                $appointment->setJobOffer($a['jobOfferId']);
+                return $appointment;
+            },$value);
+            return count($resp)>1 ? $resp : $resp[0];
+        }
     }

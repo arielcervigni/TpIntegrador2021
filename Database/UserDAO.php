@@ -13,8 +13,8 @@
             try{
                 $con = Connection::getInstance();
                 
-                $query = 'INSERT INTO USERS (userId,firstName,lastName,phoneNumber,email,pass,isAdmin,isActive) VALUES
-                            (0,:firstName,:lastName,:phoneNumber,:email,:pass,:isAdmin,:isActive)';
+                $query = 'INSERT INTO USERS (userId,firstName,lastName,phoneNumber,email,pass,isAdmin,isActive,companyId) VALUES
+                            (0,:firstName,:lastName,:phoneNumber,:email,:pass,:isAdmin,:isActive,:companyId)';
                 
                 $params['firstName'] = $user->getStudent()->getFirstName();
                 $params['lastName'] = $user->getStudent()->getLastName();
@@ -23,6 +23,7 @@
                 $params['pass'] = $user->getPassword();
                 $params['isAdmin'] = $user->getProfile();
                 $params['isActive'] = true;
+                $params['companyId'] = $user->getCompany()->GetCompanyId();
 
                 // (:firstName,:lastName,:phoneNumber,:email,:pass,:isAdmin,:active)';
 
@@ -85,6 +86,7 @@
                 $user->setPassword($a['pass']);
                 $user->setProfile($a['isAdmin']);
                 $user->setActive($a['isActive']);
+                $user->setCompany($a['companyId']);
                     
                 return $user;
             },$value);

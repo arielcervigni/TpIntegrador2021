@@ -5,6 +5,7 @@
     use DAO\StudentApiDAO as StudentApiDAO;
     use DAO\CareerApiDAO as CareerApiDAO;
     use Database\UserDAO as UserDAO;
+    use Database\CompanyDAO as CompanyDAO;
     use Controllers\AppointmentController as AppointmentController;
     use Models\User as User;
     
@@ -13,13 +14,14 @@
 
         private $careerApiDAO;
         private $studentApiDAO;
-    
+        private $companyDAO;
 
         public function __construct()
     {
         $this->careerApiDAO = DAOS::getCareerApiDAO();
         $this->studentApiDAO = DAOS::getStudentApiDAO();
         $this->userDAO = new UserDAO();
+        $this->companyDAO = new CompanyDAO();
     }
 
         public function ShowLogin($message = "")
@@ -50,37 +52,56 @@
             $careerList = $this->careerApiDAO->GetAll();
             $studentList = $this->studentApiDAO->GetAll($careerList);
             $rta = 0;
-            if(count($studentList) > 0){
-                foreach ($studentList as $student){
-                    if($student->getEmail() == $email && $student->getActive() == 1){
-                        $user = $this->userDAO->Login($email,$password);
-                        if(!empty($user)){
-                          
-                            if($user->getActive() == true){
-                                $user->setStudent($student);
-                                $rta = 1;
-                            } else
-                                $rta = 5;
-                        } else 
-                            $rta = 3;
-                           
-                    } else if ($student->getEmail() == $email && $student->getActive() != 1)
-                        $rta = 2;
-                    
-                }
-                
-            } else 
-                $rta = 4;
-            
 
+            $user = $this->userDAO->Login($email,$password);
+            
+            if(!$user){
+                $rta = 0;
+            }else if($user->getProfile() != "Estudiante"){
+                $rta = 1;
+            } else {
+                if(count($studentList) > 0){
+                    foreach ($studentList as $student){
+                        if($student->getEmail() == $email && $student->getActive() == 1){
+                            if(!empty($user)){
+                              
+                                if($user->getActive() == true){
+                                    $user->setStudent($student);
+                                    $rta = 1;
+                                } else
+                                    $rta = 5;
+                            } else 
+                                $rta = 3;
+                               
+                        } else if ($student->getEmail() == $email && $student->getActive() != 1)
+                            $rta = 2;
+                        
+                    }
+                    
+                } else 
+                    $rta = 4;
+            } 
+            
+        
             switch ($rta){
                 case 0:
-                    // No lo encuentra en la API
-                    $message = "El email ingresado no se encuentra registrado.";
+                    $message = "Usuario o contraseña incorrecta";
                     $this->ShowLogin($message);
                     break;
                 case 1:
                     // TODO OK
+                    if($user->getProfile() == "Company"){
+                        $company = $this->companyDAO->GetCompanyById($user->getCompany());
+                        //var_dump($company);
+                        if($company->getActive())
+                            $user->setCompany($company);
+                        else{
+                            $message = "La empresa correspondiente a este usuario no se encuentra activa.";
+                            $this->ShowLogin($message);
+                        }
+
+                    }
+
                     $_SESSION["loggeduser"] = $user;
                     
                     if(intval($jobOfferId) > 0){

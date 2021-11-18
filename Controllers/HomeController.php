@@ -3,6 +3,7 @@
 
     use Database\JobOfferDAO as JobOfferDAO;
     use Database\CompanyDAO as CompanyDAO;
+    use Database\AppointmentDAO as AppointmentDAO;
     use DAO\JobPositionApiDAO as JobPositionApiDAO;
     use DAO\CareerApiDAO as CareerApiDAO;
     use Models\JobOffer as JobOffer;
@@ -17,17 +18,38 @@
             $companyDAO = new CompanyDAO();
             $jobPositionApiDAO = new JobPositionApiDAO();
             $careerApiDAO = new CareerApiDAO();
+            $appointmentDAO = new AppointmentDAO();
             $jobPositionList = $jobPositionApiDAO->GetAll();
-            $jobOffers = $jobOfferDAO->GetAll();
-
+            $jobOffers = $jobOfferDAO->GetAllActive();
+            $btnDisabled = false;
            
+
                 if($career !='all')
                     $jobOffers = $jobOfferDAO->GetAllByCareer($career);
                 
                 if($jobPosition != 'all')  
                     $jobOffers = $this->FindJobOffersByJobPosition($jobOffers,$jobPosition);
             
+                if(isset($_SESSION["loggeduser"]) && $_SESSION["loggeduser"]->getProfile() == "Company"){
+                    $companyId = $_SESSION["loggeduser"]->getCompany()->getCompanyId();
+                    $jobOffersByCompany = array();
+                    foreach($jobOffers as $jo){
+                        if($jo->getCompany() == $companyId)
+                            array_push($jobOffersByCompany, $jo);
+                    }
+                    $jobOffers = $jobOffersByCompany;
+                }
                 
+                if(isset($_SESSION["loggeduser"]) && $_SESSION["loggeduser"]->getProfile() == 'Estudiante'){
+                    //var_dump($appointmentDAO->IsAppointment($_SESSION["loggeduser"]->getStudent()->getStudentId()));
+                    if($appointmentDAO->IsAppointment($_SESSION["loggeduser"]->getStudent()->getStudentId()) === false){
+                        //echo "No hay postulaciones";
+                        $btnDisabled = false;
+                    } else {
+                        $btnDisabled = true;
+                    }
+                }    
+                    
 
             $jobOfferList = array();
             
@@ -76,5 +98,7 @@
             
             $this->Index('all','all','Gracias por utilizar Ofertas Laborales.');
         }
+
+        
     }
 ?>

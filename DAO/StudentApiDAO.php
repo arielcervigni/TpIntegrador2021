@@ -4,6 +4,8 @@
 
     use Models\Student as Student;
     use Models\Career as Career;
+    use DateTime as DateTime;
+    use Database\Connection as Connection;
 
     class StudentApiDAO
     {
@@ -28,7 +30,8 @@
                   $student->setDni($studentAPI['dni']);
                   $student->setFileNumber($studentAPI['fileNumber']);
                   $student->setGender($studentAPI['gender']);
-                  $student->setBirthDate($studentAPI['birthDate']);
+                  $d = new DateTime($studentAPI['birthDate']);
+                  $student->setBirthDate($d->format('Y-m-d'));
                   $student->setEmail($studentAPI['email']);
                   $student->setPhoneNumber($studentAPI['phoneNumber']);
                   $student->setActive($studentAPI['active']);
@@ -38,31 +41,31 @@
                //}
             }
 
-            array_push($studentList,$this->createUserAdmin($list));
+            // array_push($studentList,$this->createUserAdmin($list));
             return $studentList;
             
         }
 
-        function createUserAdmin ($careerList) {
-         $student = new Student();
-         $career = new Career();
-         $career = $this->searchInArray($careerList, 1);
-         //var_dump($career);
-         $student->setStudentId(9999999999);
-         $student->setCareer($career);
-         $student->setFirstName("Ariel");
-         $student->setLastName("Cervigni");
-         $student->setDni("37098210");
-         $student->setFileNumber("21-891-4548");
-         $student->setGender("Masculino");
-         $student->setBirthDate("1992-07-18");
-         $student->setEmail("arielcervigni@gmail.com");
-         $student->setPhoneNumber("2235939221");
-         $student->setActive(true);
-         $student->setProfile("Administrador");
+      //   function createUserAdmin ($careerList) {
+      //    $student = new Student();
+      //    $career = new Career();
+      //    $career = $this->searchInArray($careerList, 1);
+      //    //var_dump($career);
+      //    $student->setStudentId(9999999999);
+      //    $student->setCareer($career);
+      //    $student->setFirstName("Ariel");
+      //    $student->setLastName("Cervigni");
+      //    $student->setDni("37098210");
+      //    $student->setFileNumber("21-891-4548");
+      //    $student->setGender("Masculino");
+      //    $student->setBirthDate("1992-07-18");
+      //    $student->setEmail("arielcervigni@gmail.com");
+      //    $student->setPhoneNumber("2235939221");
+      //    $student->setActive(true);
+      //    $student->setProfile("Administrador");
 
-         return $student;
-        }
+      //    return $student;
+      //   }
 
         function callAPI($method, $url, $data){
             $curl = curl_init();
@@ -117,13 +120,16 @@
 
          }
 
-         function GetStudentById($careerList, $studentId) {
-            $studentList = $this->GetAll($careerList);
+         function GetStudentById($careerList, $studentId, $studentList = null) {
+            if($studentList == null)
+               $studentList = $this->GetAll($careerList);
             $student = null;
             foreach($studentList as $student){
                if($student->getStudentId() == $studentId)
                   return $student;
             }
          }
+
+      
     }
 ?>

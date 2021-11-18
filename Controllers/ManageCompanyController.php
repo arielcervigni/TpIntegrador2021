@@ -194,7 +194,7 @@ class ManageCompanyController
         foreach ($companyList as $company) {
 
             if($word !== ""){
-                if (strpos($company->getDescription(), $word) !== false) 
+                if (stripos($company->getDescription(), $word) !== false) 
                     array_push($companyFilter, $company);
                 
                 $companyList = $companyFilter;

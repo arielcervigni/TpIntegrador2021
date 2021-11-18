@@ -32,18 +32,21 @@
         #echo "<small>" . $message . "</small>";
       ?>
         <div class="container">
-          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <?php if($message == "Usuario agregado con éxito."){ ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+          <?php } else { ?> 
+              <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <?php } ?>
             <?php echo $message ?>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
         </div>
-      <?php
-      }
-      ?>
+      <?php } ?>
       <button class="btn btn-primary w-50 loginBoton" type="submit">Iniciar Sesión</button>
       
+      <a type="button" class="btn btn-danger" href="<?php echo FRONT_ROOT . 'NewUser/ShowAddView' ?>">Registrarse</a>
       
       <br>
     </form>

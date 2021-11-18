@@ -89,6 +89,7 @@
           <div class="container" style="display:flex; justify-content:flex-start">
                <a type="button" class="btn btn-danger" href="<?php echo FRONT_ROOT . 'NewUser/ShowAdminAddView' ?>">Agregar Administrador</a>
                <a type="button" class="btn btn-primary" href="<?php echo FRONT_ROOT . 'NewUser/ShowAddView' ?>">Agregar Usuario</a>
+               <a type="button" class="btn btn-success" href="<?php echo FRONT_ROOT . 'NewUser/ShowAddUserCompanyView' ?>">Nuevo Usuario Empresa</a>
               </div>
           <?php } ?>
      </section>

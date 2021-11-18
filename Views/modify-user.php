@@ -38,7 +38,14 @@ if(!isset($_SESSION["loggeduser"])){
                          <form action=<?php echo FRONT_ROOT ?>NewUser/Modify method="POST">
                          
                               <div class="row justify-content-start">
-                                   <div class="col-lg-6">
+                                   <?php if($user->getProfile() == "Company") { ?>
+                                        <input type="hidden" name="firstName" value=""></input>
+                                        <input type="hidden" name="lastName" value=""></input>
+
+                                        
+
+                                   <?php } else { ?>
+                                        <div class="col-lg-6">
                                         <div class="form-group">
                                              <label for="">Nombre:</label><br>
                                              <input style="width:100%;" type="text" placeholder="Nombre" name="firstName" value="<?php if($user != null) echo $user->getStudent()->getFirstName(); else echo ""; ?>" required>
@@ -51,11 +58,13 @@ if(!isset($_SESSION["loggeduser"])){
                                              <input style="width:100%;" type="text" placeholder="Apellido" name="lastName" value="<?php if($user != null) echo $user->getStudent()->getLastName(); else echo ""; ?>" required>
                                         </div>
                                    </div>
+                                   <?php } ?>
+                                   
                               
                                    <div class="col-lg-6">
                                         <div class="form-group">
                                              <label for="">Email:</label><br>
-                                             <input style="width:100%;" type="text" name="email" size="100" placeholder="Email" value="<?php if($user != null) echo $user->getStudent()->getEmail(); else echo ""; ?>" required>
+                                             <input style="width:100%;" type="text" name="email" size="100" placeholder="Email" value="<?php if($user != null) echo $user->getStudent()->getEmail(); else echo ""; ?>" readonly>
                                         </div>
                                    </div>
 
@@ -81,12 +90,29 @@ if(!isset($_SESSION["loggeduser"])){
                                    </div>       
 
                                    <input style="width:100%;" type="hidden" name="profile" value="<?php if($user != null) echo $user->getProfile(); else echo ""; ?>" readonly>
+                                   <input type="hidden" name="userId" value="<?php echo $userId; ?>">
+                                   <div class="col-lg-12">
+                                        <label for="">Empresa:</label>
+                                        <div class="form-group">
+                                             <select name="companyId" class="form-control">
+                                             <?php if(is_string($user->getCompany())) { 
+                                                  foreach($companyList as $company) { 
+                                                       if($company->getCompanyId() == $user->getCompany()) {?>
+                                                            <option selected="true" value="<?php echo $company->getCompanyId() ?>"><?php echo $company->getDescription() ?></option>
+                                                            <?php } else { ?>
+                                                       <option value="<?php echo $company->getCompanyId() ?>"><?php echo $company->getDescription() ?></option>
+                                                  <?php } } }  ?>
+                                             </select>
+                                        </div>
+                                   </div>
 
+                                   <?php if(isset($_SESSION["loggeduser"]) && $_SESSION["loggeduser"]->getProfile() == "Administrador") { ?>
                                    <a type="button" class="btn btn-secondary" href="<?php echo FRONT_ROOT . 'NewUser/ShowListView' ?>">Ver Usuarios</a>
                                    <!-- <form action="<?php echo FRONT_ROOT . 'NewUser/RemoveItem' ?>" method="POST">
                                    <button type="submit" value="<?php echo $user->getUserId() ?>" class="btn btn-danger ml-auto d-block" name="Borrar">Borrar</button>
                                    </form> -->
-                                   <button type="submit" name="button" value ="<?php echo $userId; ?>" class="btn btn-primary ml-auto d-block">Guardar</button>
+                                   <?php } ?>
+                                   <button type="submit" name="" value ="<?php echo $userId; ?>" class="btn btn-primary ml-auto d-block">Guardar</button>
                                    
                               </form> 
                               <div>

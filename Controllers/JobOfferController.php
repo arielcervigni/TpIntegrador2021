@@ -10,6 +10,7 @@ use DAO\JobPositionApiDAO as JobPositionApiDAO;
 use Models\JobPosition as JobPosition;
 use Database\CompanyDAO as CompanyDAO;
 use Models\Company as Company;
+use Controllers\HomeController as HomeController;
 
 class JobOfferController
 {
@@ -89,5 +90,53 @@ class JobOfferController
         }
     }
 
+    public function ShowModifyView($jobOfferId, $message = ""){
+        $jobOffer = $this->jobOfferDAO->GetJobOfferById($jobOfferId);
+        $jobPositionList = $this->jobPositionApiDAO->GetAll();
+        $companyList = $this->companyDAO->GetAllActive();
+        require_once(VIEWS_PATH."modify-joboffer.php");
+    }
+
+    public function Modify($companyId, $endDate, $province, $city, $modality, $availability, $jobPosition, $description, $jobOfferId){
+        //echo $companyId. $endDate. $province. $city. $modality. $availability. $jobPosition. $description. $jobOfferId;
+        $jobOffer = new JobOffer();
+        $jobOffer->setJobOfferId($jobOfferId);
+        $company = $this->companyDAO->GetCompanyById($companyId);
+        $jobOffer->setCompany($company);
+        $jobOffer->setEndDate($endDate);
+        $jobOffer->setProvince($province);
+        $jobOffer->setCity($city);
+        $jobOffer->setModality($modality);
+        $jobOffer->setAvailability($availability);
+        $jobPosition = $this->jobPositionApiDAO->GetJobPositionById($jobPosition);
+        $jobOffer->setJobPosition($jobPosition);
+        $jobOffer->setDescription($description);
+
+
+        $jobOfferList = $this->jobOfferDAO->GetAll();
+        foreach($jobOfferList as $jo) {
+            $company = $this->companyDAO->GetCompanyById($jo->getCompany());
+            $jo->setCompany($company);
+            $jobPosition = $this->jobPositionApiDAO->GetJobPositionById($jo->getJobPosition());
+            $jo->setJobPosition($jobPosition);
+        }
+
+        $homeController = new HomeController();
+
+        if($this->jobOfferDAO->Update($jobOffer) == 1){
+            $message = "Oferta laboral editada con éxito.";
+            $homeController->Index("all","all",$message);
+        } else {
+            $message = "Error al editar la oferta laboral.";
+            $homeController->Index("all","all",$message);
+        }
+    }
+
+    public function Remove($jobOfferId){
+        $this->jobOfferDAO->Delete($jobOfferId);
+        $homeController = new HomeController();
+        $message = "Oferta laboral eliminada con éxito.";
+        $homeController->Index("all","all",$message);
+    }
 }
 ?>

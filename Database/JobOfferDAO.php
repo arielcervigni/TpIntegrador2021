@@ -17,8 +17,8 @@
             try{
                 $con = Connection::getInstance();
                 
-                $query = 'INSERT INTO JOBOFFERS (jobOfferId,companyId,province,city,endDate,jobPositionId,modality,availability,descrip,isActive) VALUES
-                            (0,:companyId,:province,:city,:endDate,:jobPositionId,:modality,:availability,:descrip,:isActive)';
+                $query = 'INSERT INTO JOBOFFERS (jobOfferId,companyId,province,city,endDate,jobPositionId,modality,availability,descrip,careerId,isActive) VALUES
+                            (0,:companyId,:province,:city,:endDate,:jobPositionId,:modality,:availability,:descrip,:careerId,:isActive)';
                 
                 $params['companyId'] = $jobOffer->getCompany()->getCompanyId();
                 $params['province'] = $jobOffer->getProvince();
@@ -40,7 +40,18 @@
         public function GetAll(){
             try{
                 $con = Connection::getInstance();
-                $query = 'SELECT * FROM JOBOFFERS';
+                $query = 'SELECT * FROM JOBOFFERS order by isActive, endDate asc';
+                $array = $con->execute($query);
+                return (!empty($array)) ? $this->mapping($array) : false;
+            }catch(PDOException $e){
+                throw $e;
+            }
+        }
+
+        public function GetAllActive(){
+            try{
+                $con = Connection::getInstance();
+                $query = 'SELECT * FROM JOBOFFERS WHERE isActive = 1 order by endDate asc';
                 $array = $con->execute($query);
                 return (!empty($array)) ? $this->mapping($array) : false;
             }catch(PDOException $e){
@@ -123,19 +134,21 @@
             }
         }
 
-        public function Update($user) {
+        public function Update($jobOffer) {
             try{
-                $query = 'UPDATE USERS SET firstName = :firstName, lastName = :lastName, email = :email,
-                phoneNumber = :phoneNumber, pass = :password, isAdmin = :profile
-                 WHERE userId = :userId;';
+                $query = 'UPDATE JOBOFFERS SET companyId = :companyId, endDate = :endDate, province = :province,
+                city = :city, modality = :modality, availability = :availability, jobPositionId = :jobPositionId, descrip = :description
+                 WHERE jobOfferId = :jobOfferId;';
                 $con = Connection::getInstance();
-                $params['userId'] = $user->getUserId();
-                $params['firstName'] = $user->getStudent()->getFirstName();
-                $params['lastName'] = $user->getStudent()->getLastName();
-                $params['email'] = $user->getStudent()->getEmail();
-                $params['phoneNumber'] = $user->getStudent()->getPhoneNumber();
-                $params['password'] = $user->getPassword();
-                $params['profile'] = $user->getProfile();
+                $params['jobOfferId'] = $jobOffer->getJobOfferId();
+                $params['companyId'] = $jobOffer->getCompany()->getCompanyId();
+                $params['endDate'] = $jobOffer->getEndDate();
+                $params['province'] = $jobOffer->getProvince();
+                $params['city'] = $jobOffer->getCity();
+                $params['modality'] = $jobOffer->getModality();
+                $params['availability'] = $jobOffer->getAvailability();
+                $params['jobPositionId'] = $jobOffer->getJobPosition()->getJobPositionId();
+                $params['description'] = $jobOffer->getDescription();
                 return $con->executeNonQuery($query, $params);
             }catch(PDOException $e){
                 echo 'Exception en Update='.$e->getMessage();

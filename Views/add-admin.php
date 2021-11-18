@@ -80,6 +80,9 @@ if(!isset($_SESSION["loggeduser"])){
                                         </div>
                                    </div>       
 
+                                   <input type="hidden" value="-1" name="companyId"></input>
+
+                                   <a type="button" class="btn btn-success" href="<?php echo FRONT_ROOT . 'NewUser/ShowAddUserCompanyView' ?>">Nuevo Usuario Empresa</a>
                                    <a type="button" class="btn btn-secondary" href="<?php echo FRONT_ROOT . 'NewUser/ShowListView' ?>">Ver Usuarios</a>
                                    <a type="button" class="btn btn-danger" href="<?php echo FRONT_ROOT . 'NewUser/ShowAddView' ?>">Nuevo Usuario</a>
                                    <button type="submit" name="button" value ="Administrador" class="btn btn-primary ml-auto d-block">Agregar Administrador</button>
