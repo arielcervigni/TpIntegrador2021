@@ -3,7 +3,7 @@ namespace Controllers;
 
 
 use DAO\DAOS as DAOS;
-use DAO\companyDAO as companyDAO;
+use Database\CompanyDAO as CompanyDAO;
 use Models\Company as Company;
 
 class ManageCompanyController
@@ -54,8 +54,12 @@ class ManageCompanyController
 
     public function ShowListView ($message = "")
     {
-        $companyList = $this->companyDAO->getAll();
+        $companyList = $this->companyDAO->getAllActive();
+        if(empty($companyList)){
+            $message = "No hay empresas para mostrar.";
+        } 
         require_once(VIEWS_PATH."company-list.php");
+        
     }
 
     private function Add ($companyId, $cuit, $description, $aboutUs, $companyLink, $active)
@@ -83,15 +87,17 @@ class ManageCompanyController
                 //var_dump($verifyCompany);
 
         if($verifyCompany == "OK"){
-            $companyList[$companyPos]->setCuit($cuit);
-            $companyList[$companyPos]->setDescription($description);
-            $companyList[$companyPos]->setAboutUs($aboutUs);
-            $companyList[$companyPos]->setCompanyLink($companyLink);
-            $this->companyDAO->setcompanyList($companyList);
-            $companyList = $this->companyDAO->getcompanyList($companyList);
-            $this->companyDAO->saveData();
+            $company = new Company();
+            $company->setCompanyId($companyId);
+            $company->setCuit($cuit);
+            $company->setDescription($description);
+            $company->setCompanyLink($companyLink);
+            $company->setAboutUs($aboutUs);
+
+            if($this->companyDAO->Update($company) == 1){
+                $this->ShowListView("Empresa editada correctamente.");
+            }
         
-            $this->ShowListView("Empresa editada correctamente.");
         } else {
             if($verifyCompany == "CUIT")
                 $message = "El CUIT ingresado ya se encuentra registrado.";
@@ -111,50 +117,37 @@ class ManageCompanyController
     public function AddIDUnico ($cuit, $description, $aboutUs, $companyLink)
     {    
         $companyList = $this->companyDAO->getAll();
-        $companyId = $this->getLastId($companyList);
         $active = true;
 
-        if($companyId > 0){
 
-            $verifyCompany = $this->verifyNewCompany($companyList, $cuit, $description, $companyLink, $companyId);
+        $verifyCompany = $this->verifyNewCompany($companyList, $cuit, $description, $companyLink, 0);
                 //var_dump($verifyCompany);
 
-                if($verifyCompany == "OK"){
-                    $this->Add($companyId, $cuit, $description, $aboutUs, $companyLink, $active);
-                } else {
-                    if($verifyCompany == "CUIT")
-                        $message = "El CUIT ingresado ya se encuentra registrado.";
-                    
-                    if($verifyCompany == "DESCRIPTION")
-                        $message = "La descripción ingresada ya se encuentra registrada.";
-                    
-                    if($verifyCompany == "COMPANYLINK")
-                        $message = "El link ingresado ya se encuentra registrado.";
 
-                    $this->ShowAddView($message, $cuit, $description, $aboutUs, $companyLink);
-                }
+        if($verifyCompany == "OK"){
+            $this->Add(0, $cuit, $description, $aboutUs, $companyLink, $active);
         } else {
-            $message = "Error al cargar la empresa. Código duplicado";
-            $this->ShowAddView($message);
+            if($verifyCompany == "CUIT")
+                $message = "El CUIT ingresado ya se encuentra registrado.";
+            if($verifyCompany == "DESCRIPTION")
+                $message = "La descripción ingresada ya se encuentra registrada.";
+            if($verifyCompany == "COMPANYLINK")
+                $message = "El link ingresado ya se encuentra registrado.";
+
+            $this->ShowAddView($message, $cuit, $description, $aboutUs, $companyLink);
         }
+        
         
     }
 
 
     public function RemoveItem ($remove)
     {
-        $companyList = $this->companyDAO->getAll();
-
-        $pos = $this->searchPositionAtId ($companyList, $remove);
-
-        if ($pos != -1)
-            unset($companyList[$pos]);
-        
-        $this->companyDAO->setcompanyList($companyList);
-        $companyList = $this->companyDAO->getcompanyList($companyList);
-        $this->companyDAO->saveData();
+        if($this->companyDAO->Delete($remove) == 1){
+            $this->ShowListView("Empresa borrada con éxito.");
+        }
             
-        if(count($companyList) == 0) {
+        if(!empty($companyList)) {
             $message = "No hay empresas para mostrar";
             $this->ShowListView($message);
         } else
@@ -182,9 +175,10 @@ class ManageCompanyController
 
     private function getLastId ($array)
     {
-        $size = count($array);
-        if($size > 0) {
-            $i = $size-1;
+        //$size = count($array);
+        if(!empty($array)) {
+        //if($size > 0) {
+            $i = count($array)-1;
             $id = $array[$i]->getCompanyId();
         } else 
             $id = 0;
@@ -200,7 +194,7 @@ class ManageCompanyController
         foreach ($companyList as $company) {
 
             if($word !== ""){
-                if (strpos($company->getDescription(), $word) !== false) 
+                if (stripos($company->getDescription(), $word) !== false) 
                     array_push($companyFilter, $company);
                 
                 $companyList = $companyFilter;
@@ -214,18 +208,19 @@ class ManageCompanyController
     }
 
     private function verifyNewCompany($companyList, $cuit, $description, $companyLink, $companyId) {
-        foreach ($companyList as $company)
-        {
-            if($company->getCuit() == $cuit && $company->getCompanyId() != $companyId)
-                return "CUIT";
+        if(!empty($companyList)){
+            foreach ($companyList as $company){
+                if($company->getCuit() == $cuit && $company->getCompanyId() != $companyId && $company->getActive() == 1)
+                    return "CUIT";
 
-            if($company->getDescription() == $description && $company->getCompanyId() != $companyId)
-                return "DESCRIPTION";
+                if(strcasecmp($description,$company->getDescription()) == 0 && $company->getCompanyId() != $companyId && $company->getActive() == 1)
+                    return "DESCRIPTION";
 
-            if($company->getCompanyLink() == $companyLink && $company->getCompanyId() != $companyId)
-                return "COMPANYLINK";
+                if(strcasecmp($companyLink,$company->getCompanyLink()) == 0 && $company->getCompanyId() != $companyId && $company->getActive() == 1)
+                    return "COMPANYLINK";
 
-        }
+            }
+        } 
     
         return "OK";
     }

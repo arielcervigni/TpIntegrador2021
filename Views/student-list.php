@@ -65,9 +65,7 @@ if(!isset($_SESSION["loggeduser"])){
           </tbody>
         </table>
           </div>
-          <!-- <div class="container" style="display:flex; justify-content:flex-start">
-               <a type="button" class="btn btn-light" href="<?php echo FRONT_ROOT . 'Student/Add' ?>">Listado de Cines</a>
-          </div> -->
+     
      </section>
 
      <main>

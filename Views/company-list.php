@@ -40,19 +40,21 @@
 
           <thead class="thead-dark">
             <tr>
-              <th>ID</th>
-              <th>Cuit</th>
-              <th style="width:40%;">Descripcion</th>
-              <th style="width:40%;">Acerca de</th>
-              <th>Link</th>
-              <th>Active</th>
-              <th colspan="3" style="text-align:center;">Acciones</th>
+              <th style="width:5%;">ID</th>
+              <th style="width:20%;">Cuit</th>
+              <th style="width:20%;">Descripcion</th>
+              <th style="width:20%;">Acerca de</th>
+              <th style="width:15%;" >Link</th>
+              <th style="width:20%;" colspan="4" style="text-align:center;">Acciones</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody> 
                 <?php
-                   foreach ($companyList as $company)
-                   {
+                
+                //if(!empty($companyList)){
+                  //var_dump($companyList);
+                   foreach ($companyList as $company){
+                    
                 ?>
                           
                    <tr>
@@ -61,7 +63,6 @@
                    <td style="vertical-align: middle;"><?php echo $company->getDescription() ?></td>
                    <td style="vertical-align: middle;"><?php echo $company->getAboutUs() ?></td>
                    <td style="vertical-align: middle;"><?php echo $company->getCompanyLink() ?></td>  
-                   <td style="vertical-align: middle;"><?php if($company->getActive() == 1){ echo "Activo"; } else { echo "Inactivo"; }?></td> 
                    
                    <td>
                     <div class="btn-group">
@@ -76,6 +77,9 @@
                         <button type="submit" value="<?php echo $company->getCompanyId() ?>" class="btn btn-danger btn-sm" name="Borrar">Borrar</button>
                       </form>
                       <?php } ?>
+                      <form action="<?php echo FRONT_ROOT . 'JobOffer/ShowListByCompany' ?>" method="POST">
+                        <button type="submit" name="companyId" value="<?php echo $company->getCompanyId() ?>" class="btn btn-success btn-sm" name="Ofertas">Ofertas</button>
+                      </form>
                     </div>  
                   <td> 
                    </tr>
@@ -89,7 +93,7 @@
           <div class="container" style="display:flex; justify-content:flex-start">
                <a type="button" class="btn btn-primary" href="<?php echo FRONT_ROOT . 'ManageCompany/ShowAddView' ?>">Agregar Empresa</a>
           </div>
-          <?php } ?>
+          <?php }  ?>
      </section>
 
      <main>

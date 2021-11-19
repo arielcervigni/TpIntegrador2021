@@ -14,17 +14,39 @@
             //$errors = $response['response']['errors'];
             //var_dump($response);
             $careerList = array();
-            foreach ($response as $careerAPI){
-               $career = new Career();
-               $career->setCareerId($careerAPI['careerId']);
-               $career->setDescription($careerAPI['description']);
-               $career->setActive($careerAPI['active']);
-               //var_dump($career);
-               array_push($careerList,$career);
-            }
+            //if(!empty($careerList)){
+               foreach ($response as $careerAPI){
+                  $career = new Career();
+                  $career->setCareerId($careerAPI['careerId']);
+                  $career->setDescription($careerAPI['description']);
+                  $career->setActive($careerAPI['active']);
+                  //var_dump($career);
+                  array_push($careerList,$career);
+               }
+            //}
             return $careerList;
             
         }
+
+        function GetAllActive($list = ""){
+
+         $get_data = $this->callAPI('GET', 'https://utn-students-api.herokuapp.com/api/Career/',false);
+         $response = json_decode($get_data, true);
+         $careerList = array();
+            foreach ($response as $careerAPI){
+               if($careerAPI['active'] == true){
+                  $career = new Career();
+                  $career->setCareerId($careerAPI['careerId']);
+                  $career->setDescription($careerAPI['description']);
+                  $career->setActive($careerAPI['active']);
+                  
+                  array_push($careerList,$career);
+               }
+            }
+         
+         return $careerList;
+         
+     }
 
 
         function callAPI($method, $url, $data){
@@ -57,6 +79,7 @@
             if(!$result){die("Connection Failure");}
             curl_close($curl);
             return $result;
+            
          }
     }
 

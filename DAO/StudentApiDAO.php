@@ -4,6 +4,8 @@
 
     use Models\Student as Student;
     use Models\Career as Career;
+    use DateTime as DateTime;
+    use Database\Connection as Connection;
 
     class StudentApiDAO
     {
@@ -15,52 +17,55 @@
             //$errors = $response['response']['errors'];
             //var_dump($response);
             $studentList = array();
-            foreach ($response as $studentAPI){
-               $student = new Student();
-               $career = new Career();
+            //if(!empty($careerList)){
+               foreach ($response as $studentAPI){
+                  $student = new Student();
+                  $career = new Career();
 
-               $student->setStudentId($studentAPI['studentId']);
-               $career = $this->searchInArray($list, $studentAPI['careerId']);
-               $student->setCareer($career);
-               $student->setFirstName($studentAPI['firstName']);
-               $student->setLastName($studentAPI['lastName']);
-               $student->setDni($studentAPI['dni']);
-               $student->setFileNumber($studentAPI['fileNumber']);
-               $student->setGender($studentAPI['gender']);
-               $student->setBirthDate($studentAPI['birthDate']);
-               $student->setEmail($studentAPI['email']);
-               $student->setPhoneNumber($studentAPI['phoneNumber']);
-               $student->setActive($studentAPI['active']);
-               $student->setProfile("Student");
+                  $student->setStudentId($studentAPI['studentId']);
+                  $career = $this->searchInArray($list, $studentAPI['careerId']);
+                  $student->setCareer($career);
+                  $student->setFirstName($studentAPI['firstName']);
+                  $student->setLastName($studentAPI['lastName']);
+                  $student->setDni($studentAPI['dni']);
+                  $student->setFileNumber($studentAPI['fileNumber']);
+                  $student->setGender($studentAPI['gender']);
+                  $d = new DateTime($studentAPI['birthDate']);
+                  $student->setBirthDate($d->format('Y-m-d'));
+                  $student->setEmail($studentAPI['email']);
+                  $student->setPhoneNumber($studentAPI['phoneNumber']);
+                  $student->setActive($studentAPI['active']);
+                  $student->setProfile("Student");
 
-               array_push($studentList,$student);
+                  array_push($studentList,$student);
+               //}
             }
 
-            array_push($studentList,$this->createUserAdmin($list));
+            // array_push($studentList,$this->createUserAdmin($list));
             return $studentList;
             
         }
 
-        function createUserAdmin ($careerList) {
-         $student = new Student();
-         $career = new Career();
-         $career = $this->searchInArray($careerList, 1);
+      //   function createUserAdmin ($careerList) {
+      //    $student = new Student();
+      //    $career = new Career();
+      //    $career = $this->searchInArray($careerList, 1);
+      //    //var_dump($career);
+      //    $student->setStudentId(9999999999);
+      //    $student->setCareer($career);
+      //    $student->setFirstName("Ariel");
+      //    $student->setLastName("Cervigni");
+      //    $student->setDni("37098210");
+      //    $student->setFileNumber("21-891-4548");
+      //    $student->setGender("Masculino");
+      //    $student->setBirthDate("1992-07-18");
+      //    $student->setEmail("arielcervigni@gmail.com");
+      //    $student->setPhoneNumber("2235939221");
+      //    $student->setActive(true);
+      //    $student->setProfile("Administrador");
 
-         $student->setStudentId(9999999999);
-         $student->setCareer($career);
-         $student->setFirstName("Ariel");
-         $student->setLastName("Cervigni");
-         $student->setDni("37098210");
-         $student->setFileNumber("21-891-4548");
-         $student->setGender("Masculino");
-         $student->setBirthDate("1992-07-18");
-         $student->setEmail("arielcervigni@gmail.com");
-         $student->setPhoneNumber("2235939221");
-         $student->setActive(true);
-         $student->setProfile("Administrador");
-
-         return $student;
-        }
+      //    return $student;
+      //   }
 
         function callAPI($method, $url, $data){
             $curl = curl_init();
@@ -114,5 +119,50 @@
          function Add($data){
 
          }
+
+         function GetStudentById($careerList, $studentId, $studentList = null) {
+            if($studentList == null)
+               $studentList = $this->GetAll($careerList);
+            $student = null;
+            foreach($studentList as $student){
+               if($student->getStudentId() == $studentId)
+                  return $student;
+            }
+         }
+
+         function GetStudentByEmail($careerList, $email, $studentList = null) {
+            if($studentList == null)
+               $studentList = $this->GetAll($careerList);
+            $student = null;
+            foreach($studentList as $student){
+               if($student->getEmail() == $email)
+                  return $student;
+            }
+         }
+
+         function GetStudentsByJobOffer($jobOfferId){
+            try{
+               $con = Connection::getInstance();
+               $query = 'SELECT DISTINCT A.studentId FROM APPOINTMENTS A 
+               JOIN JOBOFFERS JO ON JO.JOBOFFERID = A.JOBOFFERID 
+               WHERE JO.JOBOFFERID = :jobOfferId';
+               $params["jobOfferId"] = $jobOfferId;
+               $array = $con->execute($query,$params);
+               //var_dump($array);
+               return (!empty($array)) ? $this->mappingStudentId($array) : false;
+           }catch(PDOException $e){
+               throw $e;
+           }
+         }
+
+         public function mappingStudentId($value){
+            $value = is_array($value) ? $value : [];
+            $resp = array_map(function($a){
+                $studentId = ($a['studentId']);             
+                return $studentId;
+            },$value);
+            return count($resp)>1 ? $resp : $resp[0];
+        }
+      
     }
 ?>

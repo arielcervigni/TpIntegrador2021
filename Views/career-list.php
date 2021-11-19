@@ -32,9 +32,9 @@
 
           <thead class="thead-dark">
             <tr>
-              <th style="width: 33%;">CareerID</th>
-              <th style="width: 34%;">Descripcion</th>
-              <th style="width: 33%;">Active</th>
+              <th style="width: 10%;">CareerID</th>
+              <th style="width: 70%;">Descripcion</th>
+              <th style="width: 20%;">Active</th>
               <!-- <th style="width: 10%;">Ver</th> -->
             </tr>
           </thead>
