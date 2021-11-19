@@ -14,8 +14,8 @@ class StudentController
 
     public function __construct()
     {
-        $this->careerApiDAO = DAOS::getCareerApiDAO();
-        $this->studentApiDAO = DAOS::getStudentApiDAO();
+        $this->careerApiDAO = new CareerApiDAO();
+        $this->studentApiDAO = new StudentApiDAO();
     }
 
     public function ShowAddView ($message = "")

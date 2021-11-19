@@ -18,8 +18,8 @@
 
         public function __construct()
     {
-        $this->careerApiDAO = DAOS::getCareerApiDAO();
-        $this->studentApiDAO = DAOS::getStudentApiDAO();
+        $this->careerApiDAO = new CareerApiDAO();
+        $this->studentApiDAO = new StudentApiDAO();
         $this->userDAO = new UserDAO();
         $this->companyDAO = new CompanyDAO();
     }

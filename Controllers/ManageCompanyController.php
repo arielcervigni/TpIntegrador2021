@@ -12,7 +12,7 @@ class ManageCompanyController
 
     public function __construct()
     {
-        $this->companyDAO = DAOS::getCompanyDAO();
+        $this->companyDAO = new CompanyDAO();
     }
 
     public function ShowAddView ($message = "", $cuit = "", $description = "", $aboutUs = "", $companyLink = "")

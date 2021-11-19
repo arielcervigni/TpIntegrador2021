@@ -11,7 +11,7 @@ class JobPositionController
 
     public function __construct()
     {
-        $this->jobPositionApiDAO = DAOS::getJobPositionApiDAO();
+        $this->jobPositionApiDAO = new JobPositionDAO();
     }
 
 
