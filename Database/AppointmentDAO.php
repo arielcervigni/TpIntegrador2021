@@ -129,7 +129,7 @@
 
         function GetStudentByJobOffer($jobOfferId) {
             try {
-               $query = 'SELECT appointmentId, studentId, jobOfferId FROM APPOINTMENTS WHERE JOBOFFERID = :jobOfferId AND isActive = 1';
+               $query = 'SELECT appointmentId, studentId, jobOfferId, cv FROM APPOINTMENTS WHERE JOBOFFERID = :jobOfferId AND isActive = 1';
                $con = Connection::getInstance();
                $params["jobOfferId"] = $jobOfferId;
                $array = $con->execute($query,$params);
@@ -146,6 +146,7 @@
                 $appointment->setAppointmentId($a['appointmentId']);
                 $appointment->setStudent($a['studentId']);
                 $appointment->setJobOffer($a['jobOfferId']);
+                $appointment->setResume($a['cv']);
                 return $appointment;
             },$value);
             return count($resp)>1 ? $resp : $resp[0];
