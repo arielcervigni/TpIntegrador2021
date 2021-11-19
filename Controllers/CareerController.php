@@ -11,7 +11,7 @@ class CareerController
 
     public function __construct()
     {
-        $this->careerApiDAO = DAOS::getCareerApiDAO();
+        $this->careerApiDAO = new CareerApiDAO();
     }
 
    

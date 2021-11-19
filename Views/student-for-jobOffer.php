@@ -57,7 +57,7 @@ if(!isset($_SESSION["loggeduser"])){
                    <td><?php echo $app->getStudent()->getEmail() ?></td>
                    <td><?php echo $app->getStudent()->getPhoneNumber() ?></td>   
                    <td><?php echo $app->getStudent()->getCareer()->getDescription() ?> </td>
-                   <td><button class="btn btn-light btn-sm" href=<?php echo FRONT_ROOT.$app->getResume()?> target="_blank" rel="noopener noreferrer">Ver</button></td>
+                   <td><a class="btn btn-light btn-sm" href=<?php echo FRONT_ROOT.$app->getResume()?> target="_blank" rel="noopener noreferrer">Ver</a></td>
                    <?php if($_SESSION["loggeduser"]->getProfile() == "Administrador") {?>
                    <td>
 

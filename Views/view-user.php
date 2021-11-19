@@ -79,12 +79,16 @@ if(!isset($_SESSION["loggeduser"])){
                                              <input style="width:100%;" type="password" name="confirmPassword" size="10" placeholder="Ingrese nuevamente su contraseña" value="<?php if($user != null) echo $user->getPassword(); else echo ""; ?>" disabled>
                                         </div>
                                    </div>       
+                                   
+                                   
+                                   
                                    <?php  if($_SESSION["loggeduser"]->getProfile() == "Administrador") { ?>
                                    <a type="button" class="btn btn-secondary" href="<?php echo FRONT_ROOT . 'NewUser/ShowListView' ?>">Ver Usuarios</a>
                                    <?php  }?>
                                    <!-- <a type="button" class="btn btn-danger" href="<?php echo FRONT_ROOT . 'NewUser/RemoveItem' ?>" value="<?php if($user != null) echo $user->getUserId(); else echo ""; ?>">Eliminar</a> -->
                                    <button type="submit" name="button" value ="<?php if($user != null) echo $user->getUserId(); else echo ""; ?>" class="btn btn-primary ml-auto d-block">Modificar</button>
                                    
+
                               </form> 
                               <div>
                               </div>

@@ -12,22 +12,33 @@
     class HomeController
     {
 
+        private $jobOfferDAO;
+        private $companyDAO;
+        private $jobPositionApiDAO;
+        private $careerApiDAO;
+        private $appointmentDAO;
+
+        public function __construct()
+    {
+        $this->jobOfferDAO = new JobOfferDAO();
+        $this->companyDAO = new CompanyDAO();
+        $this->jobPositionApiDAO = new JobPositionApiDAO();
+        $this->careerApiDAO = new CareerApiDAO();
+        $this->appointmentDAO = new AppointmentDAO();
+    }
+
         public function Index($career = 'all', $jobPosition = 'all', $message = "")
         {
             
-            $jobOfferDAO = new JobOfferDAO();
-            $companyDAO = new CompanyDAO();
-            $jobPositionApiDAO = new JobPositionApiDAO();
-            $careerApiDAO = new CareerApiDAO();
-            $appointmentDAO = new AppointmentDAO();
-            $jobPositionList = $jobPositionApiDAO->GetAll();
-            $jobOffers = $jobOfferDAO->GetAllActive();
-            $careerList = $careerApiDAO->GetAllActive();
+           
+            $jobPositionList = $this->jobPositionApiDAO->GetAll();
+            $jobOffers = $this->jobOfferDAO->GetAllActive();
+            $careerList = $this->careerApiDAO->GetAllActive();
             $btnDisabled = false;
            
 
                 if($career !='all')
-                    $jobOffers = $jobOfferDAO->GetAllByCareer($career);
+                    $jobOffers = $this->jobOfferDAO->GetAllByCareer($career);
                 
                 if($jobPosition != 'all')  
                     $jobOffers = $this->FindJobOffersByJobPosition($jobOffers,$jobPosition);
@@ -46,7 +57,7 @@
                 
                 if(isset($_SESSION["loggeduser"]) && $_SESSION["loggeduser"]->getProfile() == 'Estudiante'){
                     //var_dump($appointmentDAO->IsAppointment($_SESSION["loggeduser"]->getStudent()->getStudentId()));
-                    if($appointmentDAO->IsAppointment($_SESSION["loggeduser"]->getStudent()->getStudentId()) === false){
+                    if($this->appointmentDAO->IsAppointment($_SESSION["loggeduser"]->getStudent()->getStudentId()) === false){
                         //echo "No hay postulaciones";
                         $btnDisabled = false;
                     } else {
@@ -71,25 +82,25 @@
                     $this->FinishJobOffer($jo->getJobOfferId());
 
                 }
-                    $company = $companyDAO->GetCompanyById($jo->getCompany());
+                    $company = $this->companyDAO->GetCompanyById($jo->getCompany());
                     $jo->setCompany($company);
-                    $jobPosition = $jobPositionApiDAO->GetJobPositionById($jo->getJobPosition());
+                    $jobPosition = $this->jobPositionApiDAO->GetJobPositionById($jo->getJobPosition());
                     $jo->setJobPosition($jobPosition);
                     //$date = $jo->getEndDate();
                     $jo->setEndDate(date('d-m-Y',strtotime($jo->getEndDate())));
                     array_push($jobOfferList,$jo);
                 }
             }else {
-                $company = $companyDAO->GetCompanyById($jobOffers->getCompany());
+                $company = $this->companyDAO->GetCompanyById($jobOffers->getCompany());
                 $jobOffers->setCompany($company);
-                $jobPosition = $jobPositionApiDAO->GetJobPositionById($jobOffers->getJobPosition());
+                $jobPosition = $this->jobPositionApiDAO->GetJobPositionById($jobOffers->getJobPosition());
                 $jobOffers->setJobPosition($jobPosition);
                 //$date = $jo->getEndDate();
                 $jobOffers->setEndDate(date('d-m-Y',strtotime($jobOffers->getEndDate())));
                 array_push($jobOfferList,$jobOffers);
             }
 
-            $careerList = $careerApiDAO->GetAllActive();
+            $careerList = $this->careerApiDAO->GetAllActive();
             require_once(VIEWS_PATH."home.php");
         }
 
@@ -102,6 +113,9 @@
                     array_push($jobOfferList,$jo);
 
                 }
+            } else {
+                if($jobOffers->getJobPosition() == $jobPositionId)
+                    array_push($jobOfferList,$jobOffers);
             }
             return $jobOfferList;
         }
@@ -158,8 +172,8 @@
                 }
             }
                 //$message = "JobOffer Vencidos Cerrados Correctamente!";
-                $jobOfferDAO->Delete($jobOfferId);
-                $jobOfferList = $jobOfferDAO->GetAllActive();
+                $this->jobOfferDAO->Delete($jobOfferId);
+                $jobOfferList = $this->jobOfferDAO->GetAllActive();
                 $this->Index('all', 'all');
             }
     
