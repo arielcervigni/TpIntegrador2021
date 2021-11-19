@@ -87,7 +87,7 @@
         public function GetAllByCompany($companyId){
             try{
                 $con = Connection::getInstance();
-                $query = 'SELECT * FROM JOBOFFERS WHERE companyId ="'.$companyId.'"';
+                $query = 'SELECT * FROM JOBOFFERS WHERE isActive = 1 AND companyId ="'.$companyId.'"';
                 $array = $con->execute($query);
                 return (!empty($array)) ? $this->mapping($array) : false;
             }catch(PDOException $e){

@@ -60,13 +60,23 @@ if(!isset($_SESSION["loggeduser"])){
                                    </div>
                                    <?php } ?>
                                    
-                              
+                                   <?php if($_SESSION["loggeduser"]->getProfile() == "Estudiante" || $user->getProfile() == "Estudiante"){?>
                                    <div class="col-lg-6">
                                         <div class="form-group">
                                              <label for="">Email:</label><br>
                                              <input style="width:100%;" type="text" name="email" size="100" placeholder="Email" value="<?php if($user != null) echo $user->getStudent()->getEmail(); else echo ""; ?>" readonly>
                                         </div>
                                    </div>
+                                   <?php } else { ?>
+                                        <div class="col-lg-6">
+                                        <div class="form-group">
+                                             <label for="">Email:</label><br>
+                                             <input style="width:100%;" type="text" name="email" size="100" placeholder="Email" value="<?php if($user != null) echo $user->getStudent()->getEmail(); else echo ""; ?>" required>
+                                        </div>
+                                   </div>
+                                   
+                                   
+                                   <?php } ?>
 
                                    <div class="col-lg-6">
                                         <div class="form-group">
@@ -77,7 +87,7 @@ if(!isset($_SESSION["loggeduser"])){
                                    
                                    <div class="col-lg-6">
                                         <div class="form-group">
-                                             <label for="">Contraseña:</label><br>
+                                             <label for="">Contraseña:</label><span style="color:#FF0000;">Mínimo 6 caracteres.</span><br>
                                              <input style="width:100%;" type="password" name="password" size="10" placeholder="Ingrese su contraseña" value="<?php if($user != null) echo $user->getPassword(); else echo ""; ?>" required>
                                         </div>
                                    </div>
@@ -89,8 +99,11 @@ if(!isset($_SESSION["loggeduser"])){
                                         </div>
                                    </div>       
 
+                                   
                                    <input style="width:100%;" type="hidden" name="profile" value="<?php if($user != null) echo $user->getProfile(); else echo ""; ?>" readonly>
                                    <input type="hidden" name="userId" value="<?php echo $userId; ?>">
+
+                                   <?php if ($user->getProfile() == "Company"){?>
                                    <div class="col-lg-12">
                                         <label for="">Empresa:</label>
                                         <div class="form-group">
@@ -105,14 +118,12 @@ if(!isset($_SESSION["loggeduser"])){
                                              </select>
                                         </div>
                                    </div>
-
+                                   <?php } ?>                                                  
                                    <?php if(isset($_SESSION["loggeduser"]) && $_SESSION["loggeduser"]->getProfile() == "Administrador") { ?>
                                    <a type="button" class="btn btn-secondary" href="<?php echo FRONT_ROOT . 'NewUser/ShowListView' ?>">Ver Usuarios</a>
-                                   <!-- <form action="<?php echo FRONT_ROOT . 'NewUser/RemoveItem' ?>" method="POST">
-                                   <button type="submit" value="<?php echo $user->getUserId() ?>" class="btn btn-danger ml-auto d-block" name="Borrar">Borrar</button>
-                                   </form> -->
+                                   
                                    <?php } ?>
-                                   <button type="submit" name="" value ="<?php echo $userId; ?>" class="btn btn-primary ml-auto d-block">Guardar</button>
+                                   <button type="submit" name="" value ="<?php echo $user->getUserId(); ?>" class="btn btn-primary ml-auto d-block">Guardar</button>
                                    
                               </form> 
                               <div>

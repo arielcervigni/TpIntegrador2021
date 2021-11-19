@@ -12,7 +12,7 @@ if(!isset($_SESSION["loggeduser"])){
      <section id="listado" class="mb-5">
           <div class="container">
                <h2 class="mb-4">Mi Perfil </h2>
-               <form action="" method="POST" class="bg-dark-alpha p-5">
+               <div  class="bg-dark-alpha p-5">
                     <div class="row justify-content-start">
 
           
@@ -101,15 +101,26 @@ if(!isset($_SESSION["loggeduser"])){
                               </div>
                          </div>
                         
+                         <div class="col-lg-6">
+                         <a type="button" class="btn btn-danger" href="<?php echo FRONT_ROOT . 'Home/Index' ?>">Ver Ofertas Laborales</a>
+                         </div>
+                         <div class="col-lg-6">
+                         <form action="<?php echo FRONT_ROOT . 'NewUser/ShowModifyView' ?>" method="POST">
+                              <button type="submit" name="button" value ="<?php echo $_SESSION["loggeduser"]->getUserId()?>" class="btn btn-primary ml-auto d-block">Modificar Usuario</button>
+                              <input type="hidden" name="message" value="changePassword">
+                         </form>
+                         
+                         </div>
                          
                          
                     </div>
-               </form> 
+ </div> 
                
-               <form action="<?php echo FRONT_ROOT . 'NewUser/ShowModifyView' ?>" method="POST">
-                    <button type="submit" name="button" value ="<?php echo $_SESSION["loggeduser"]->getUserId()?>" class="btn btn-primary ml-auto d-block">Modificar Usuario</button>
-                    <input type="hidden" name="message" value="changePassword">
-               </form>
+               
+               
+               
+               </div>
+               </div>
           </div>
      </section>
 </main>

@@ -212,9 +212,8 @@ class AppointmentController
         
         
         if($_SESSION["loggeduser"]->getProfile()=='Estudiante'){
-
+            $this->appointmentDAO->Delete($id);
             $this->ShowListAppointments();
-            
         } else {
             
                 $emailController = new EmailController();

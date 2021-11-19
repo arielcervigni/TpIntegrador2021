@@ -35,10 +35,50 @@
                             <lebel class="card-title"><?php echo "Fecha límite de postulación: "; ?></lebel><span class="card-text"> <?php echo $jobOffer->getEndDate();?> </span><br><br>
                             <lebel class="card-title"><?php echo "Más información: "; ?></lebel><span class="card-text"> <?php echo $jobOffer->getDescription() ?> </span><br><br>
                           
-                          <!-- <a href="#" class="btn btn-primary">Postularme</a> -->
-                          <form action="<?php echo FRONT_ROOT . 'Appointment/ShowJobOffer' ?>" method="POST">
-                              <button type="submit" value="<?php echo $jobOffer->getJobOfferId() ?>" class="btn btn-primary" name="Borrar">Postularme</button>
-                          </form>
+                            <div class="btn-group">
+                              <?php if(isset($_SESSION["loggeduser"])) { 
+	
+                                      if($_SESSION["loggeduser"]->getProfile() == "Company") { ?>
+                                        <form action="<?php echo FRONT_ROOT . 'Appointment/ShowJobOffer' ?>" method="POST">
+                                                                <button type="submit" value="<?php echo $jobOffer->getJobOfferId() ?>" class="btn btn-primary" 
+                                                                    name="Borrar"><?php echo "Postulaciones";?> </button>
+                                                                </form>
+                                      <?php } else if($_SESSION["loggeduser"]->getProfile() == "Administrador") { ?>
+                                      
+                                            <form action="<?php echo FRONT_ROOT . 'Appointment/ShowJobOffer' ?>" method="POST">
+                                                                <button type="submit" value="<?php echo $jobOffer->getJobOfferId() ?>" class="btn btn-primary" 
+                                                                    name="Borrar"><?php echo "Postulaciones";?> </button>
+                                                                </form>
+
+                                            <form action="<?php echo FRONT_ROOT . 'JobOffer/ShowModifyView' ?>" method="POST">
+                                                                <button type="submit" value="<?php echo $jobOffer->getJobOfferId() ?>" class="btn btn-dark" 
+                                                                  name="Edit"> Editar </button>
+                                                                </form>
+
+                                            <form action="<?php echo FRONT_ROOT . 'JobOffer/Remove' ?>" method="POST">
+                                                                <button type="submit" value="<?php echo $jobOffer->getJobOfferId() ?>" class="btn btn-danger" 
+                                                                  name="Eliminar"> Eliminar </button>
+                                                                </form>
+                                      <?php } else { ?>
+                                        
+                                            <form action="<?php echo FRONT_ROOT . 'Appointment/ShowJobOffer' ?>" method="POST">
+                                            <?php if($btnDisabled) { ?>   
+                                              <button type="submit" value="<?php echo $jobOffer->getJobOfferId() ?>" class="btn btn-primary" 
+                                                  name="Borrar" disabled><?php echo "Postularme"; ?> </button>
+                                            <?php } else { ?>
+                                               <button type="submit" value="<?php echo $jobOffer->getJobOfferId() ?>" class="btn btn-primary" 
+                                                   name="Borrar"><?php echo "Postularme"; ?> </button>
+                                            <?php } ?>
+                                            </form>
+                                       <?php } ?>
+
+                          <?php } else { ?>
+                              <form action="<?php echo FRONT_ROOT . 'Appointment/ShowJobOffer' ?>" method="POST">
+                              <button type="submit" value="<?php echo $jobOffer->getJobOfferId() ?>" class="btn btn-primary" 
+                                                          name="Borrar"><?php echo "Postularme"; ?> </button>
+                              </form>
+                          <?php } ?>
+                          </div>
                       </div>
                     </div>
                           <br><br>

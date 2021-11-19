@@ -72,10 +72,16 @@
                       <form action="<?php echo FRONT_ROOT . 'NewUser/ShowModifyView' ?>" method="POST">
                       <button type="submit" value="<?php echo $user->getUserId() ?>" class="btn btn-warning btn-sm" name="Editar">Editar</button>
                       </form>
+                      <?php if ($user->getActive()){ ?>
                       <form action="<?php echo FRONT_ROOT . 'NewUser/RemoveItem' ?>" method="POST">
                         <button type="submit" value="<?php echo $user->getUserId() ?>" class="btn btn-danger btn-sm" name="Borrar">Borrar</button>
                       </form>
-                      <?php } ?>
+                      <?php } else { ?>
+                      <form action="<?php echo FRONT_ROOT . 'NewUser/ReActive' ?>" method="POST">
+                        <button type="submit" value="<?php echo $user->getUserId() ?>" class="btn btn-success btn-sm" name="Borrar">Activar</button>
+                      </form>
+                      
+                      <?php } } ?>
                     </div>  
                   <td> 
                    </tr>
@@ -87,10 +93,10 @@
           </div>
           <?php if($_SESSION["loggeduser"]->getProfile() == "Administrador") {?>
           <div class="container" style="display:flex; justify-content:flex-start">
-               <a type="button" class="btn btn-danger" href="<?php echo FRONT_ROOT . 'NewUser/ShowAdminAddView' ?>">Agregar Administrador</a>
+               <a type="button" class="btn btn-danger"  href="<?php echo FRONT_ROOT . 'NewUser/ShowAdminAddView' ?>">Agregar Administrador</a>
                <a type="button" class="btn btn-primary" href="<?php echo FRONT_ROOT . 'NewUser/ShowAddView' ?>">Agregar Usuario</a>
-               <a type="button" class="btn btn-success" href="<?php echo FRONT_ROOT . 'NewUser/ShowAddUserCompanyView' ?>">Nuevo Usuario Empresa</a>
-              </div>
+               <a type="button" class="btn btn-success" href="<?php echo FRONT_ROOT . 'NewUser/ShowUserCompanyAddView' ?>">Nuevo Usuario Empresa</a>
+              </div>                                                                           
           <?php } ?>
      </section>
 

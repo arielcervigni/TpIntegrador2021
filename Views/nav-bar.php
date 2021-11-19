@@ -55,6 +55,7 @@
               <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">Menú</a>
               <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" href="<?php echo FRONT_ROOT ?>Login/ShowMyProfile">Mi perfil</a>
               <a class="dropdown-item" href="<?php echo FRONT_ROOT ?>Home/Index">Ver Ofertas Laborales</a></a>
               <a class="dropdown-item" href="<?php echo FRONT_ROOT ?>JobOffer/ShowAddView">Agregar Oferta Laboral</a></a>
             </div>
@@ -69,9 +70,9 @@
               <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
               <a class="dropdown-item" href="<?php echo FRONT_ROOT ?>Login/ShowMyProfile">Mi perfil</a>
               <a class="dropdown-item" href="<?php echo FRONT_ROOT ?>Home/Index">Ver Ofertas Laborales</a></a>
-                <a class="dropdown-item" href="<?php echo FRONT_ROOT ?>Career/ShowListView">Ver Carreras</a>
-                <a class="dropdown-item" href="<?php echo FRONT_ROOT ?>ManageCompany/ShowListView">Ver Empresas</a>
+                
                 <a class="dropdown-item" href="<?php echo FRONT_ROOT ?>JobOffer/ShowAddView">Agregar Oferta Laboral</a></a>
+                <a class="dropdown-item" href="<?php echo FRONT_ROOT ?>Career/ShowListView">Ver Carreras</a>
                 
                 </div>
             </li>

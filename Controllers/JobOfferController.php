@@ -9,8 +9,10 @@ use Models\JobOffer as JobOffer;
 use DAO\JobPositionApiDAO as JobPositionApiDAO;
 use Models\JobPosition as JobPosition;
 use Database\CompanyDAO as CompanyDAO;
+use Database\AppointmentDAO as AppointmentDAO;
 use Models\Company as Company;
 use Controllers\HomeController as HomeController;
+use DAO\StudentApiDAO as StudentApiDAO;
 
 class JobOfferController
 {
@@ -18,6 +20,8 @@ class JobOfferController
     private $companyDAO;
     private $jobPositionApiDAO;
     private $jobOfferDAO;
+    private $studentApiDAO;
+    private $appointmentDAO;
 
     public function __construct()
     {
@@ -25,6 +29,8 @@ class JobOfferController
         $this->companyDAO = new CompanyDAO();
         $this->jobPositionApiDAO = new JobPositionApiDAO();
         $this->jobOfferDAO = new JobOfferDAO();
+        $this->studentApiDAO = new StudentApiDAO();
+        $this->appointmentDAO = new AppointmentDAO();
     }
 
     public function ShowListByCompany($companyId){
@@ -48,6 +54,12 @@ class JobOfferController
                 array_push($jobOfferList,$jo);
             }      
         }
+        
+        if($this->appointmentDAO->IsAppointment($_SESSION["loggeduser"]->getStudent()->getStudentId()) === false){
+            $btnDisabled = false;
+        } else {
+            $btnDisabled = true;
+        }
         require_once(VIEWS_PATH."view-joboffer-company.php");
     }
 
@@ -62,7 +74,7 @@ class JobOfferController
     public function ShowAddView ($message = "")
     {
         $companyList = $this->companyDAO->GetAllActive();
-        $careerList = $this->careerApiDAO->GetAll();
+        $careerList = $this->careerApiDAO->GetAllActive();
         $jobPositionList = $this->jobPositionApiDAO->GetAll();
 
         require_once(VIEWS_PATH."add-joboffer.php");
@@ -138,5 +150,7 @@ class JobOfferController
         $message = "Oferta laboral eliminada con éxito.";
         $homeController->Index("all","all",$message);
     }
+
+  
 }
 ?>

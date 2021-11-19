@@ -68,7 +68,7 @@ if(!isset($_SESSION["loggeduser"])){
                                    
                                    <div class="col-lg-6">
                                         <div class="form-group">
-                                             <label for="">Contraseña:</label><br>
+                                             <label for="">Contraseña:</label><span style="color:#FF0000;">Mínimo 6 caracteres.</span><br>
                                              <input style="width:100%;" type="password" name="password" size="10" placeholder="Ingrese su contraseña" value="" required>
                                         </div>
                                    </div>

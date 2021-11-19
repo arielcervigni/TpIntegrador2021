@@ -130,6 +130,39 @@
             }
          }
 
+         function GetStudentByEmail($careerList, $email, $studentList = null) {
+            if($studentList == null)
+               $studentList = $this->GetAll($careerList);
+            $student = null;
+            foreach($studentList as $student){
+               if($student->getEmail() == $email)
+                  return $student;
+            }
+         }
+
+         function GetStudentsByJobOffer($jobOfferId){
+            try{
+               $con = Connection::getInstance();
+               $query = 'SELECT DISTINCT A.studentId FROM APPOINTMENTS A 
+               JOIN JOBOFFERS JO ON JO.JOBOFFERID = A.JOBOFFERID 
+               WHERE JO.JOBOFFERID = :jobOfferId';
+               $params["jobOfferId"] = $jobOfferId;
+               $array = $con->execute($query,$params);
+               //var_dump($array);
+               return (!empty($array)) ? $this->mappingStudentId($array) : false;
+           }catch(PDOException $e){
+               throw $e;
+           }
+         }
+
+         public function mappingStudentId($value){
+            $value = is_array($value) ? $value : [];
+            $resp = array_map(function($a){
+                $studentId = ($a['studentId']);             
+                return $studentId;
+            },$value);
+            return count($resp)>1 ? $resp : $resp[0];
+        }
       
     }
 ?>

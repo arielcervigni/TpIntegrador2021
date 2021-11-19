@@ -23,7 +23,7 @@
                 $params['pass'] = $user->getPassword();
                 $params['isAdmin'] = $user->getProfile();
                 $params['isActive'] = true;
-                $params['companyId'] = $user->getCompany()->GetCompanyId();
+                $params['companyId'] = ($user->getCompany() != null) ? $user->getCompany()->GetCompanyId() : null ;
 
                 // (:firstName,:lastName,:phoneNumber,:email,:pass,:isAdmin,:active)';
 
@@ -118,6 +118,17 @@
                 $params['password'] = $user->getPassword();
                 $params['profile'] = $user->getProfile();
                 return $con->executeNonQuery($query, $params);
+            }catch(PDOException $e){
+                echo 'Exception en Update='.$e->getMessage();
+            }
+        }
+
+        public function ReActive($userId){
+            try{
+                $query = 'UPDATE USERS SET isActive = 1 WHERE userId = :userId;';
+                $con = Connection::getInstance();
+                $params['userId'] = $userId;
+                $con->executeNonQuery($query, $params);
             }catch(PDOException $e){
                 echo 'Exception en Update='.$e->getMessage();
             }

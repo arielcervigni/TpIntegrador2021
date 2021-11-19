@@ -6,6 +6,7 @@
     use Database\AppointmentDAO as AppointmentDAO;
     use DAO\JobPositionApiDAO as JobPositionApiDAO;
     use DAO\CareerApiDAO as CareerApiDAO;
+    use DAO\StudentApiDAO as StudentApiDAO;
     use Models\JobOffer as JobOffer;
 
     class HomeController
@@ -21,6 +22,7 @@
             $appointmentDAO = new AppointmentDAO();
             $jobPositionList = $jobPositionApiDAO->GetAll();
             $jobOffers = $jobOfferDAO->GetAllActive();
+            $careerList = $careerApiDAO->GetAllActive();
             $btnDisabled = false;
            
 
@@ -33,11 +35,13 @@
                 if(isset($_SESSION["loggeduser"]) && $_SESSION["loggeduser"]->getProfile() == "Company"){
                     $companyId = $_SESSION["loggeduser"]->getCompany()->getCompanyId();
                     $jobOffersByCompany = array();
-                    foreach($jobOffers as $jo){
-                        if($jo->getCompany() == $companyId)
-                            array_push($jobOffersByCompany, $jo);
+                    if(is_array($jobOffers)){
+                        foreach($jobOffers as $jo){
+                            if($jo->getCompany() == $companyId)
+                                array_push($jobOffersByCompany, $jo);
+                        }
+                        $jobOffers = $jobOffersByCompany;
                     }
-                    $jobOffers = $jobOffersByCompany;
                 }
                 
                 if(isset($_SESSION["loggeduser"]) && $_SESSION["loggeduser"]->getProfile() == 'Estudiante'){
@@ -59,6 +63,14 @@
                 require_once(VIEWS_PATH."home.php");
             } else if(is_array($jobOffers)){
                foreach ($jobOffers as $jo){
+
+                $date = date('Y-m-d');
+                //var_dump($date);
+
+                if($jo->getEndDate() <= $date){
+                    $this->FinishJobOffer($jo->getJobOfferId());
+
+                }
                     $company = $companyDAO->GetCompanyById($jo->getCompany());
                     $jo->setCompany($company);
                     $jobPosition = $jobPositionApiDAO->GetJobPositionById($jo->getJobPosition());
@@ -73,7 +85,7 @@
                 $jobPosition = $jobPositionApiDAO->GetJobPositionById($jobOffers->getJobPosition());
                 $jobOffers->setJobPosition($jobPosition);
                 //$date = $jo->getEndDate();
-                $jobOffers->setEndDate(date('d-m-Y',strtotime($jo->getEndDate())));
+                $jobOffers->setEndDate(date('d-m-Y',strtotime($jobOffers->getEndDate())));
                 array_push($jobOfferList,$jobOffers);
             }
 
@@ -84,10 +96,12 @@
         private function FindJobOffersByJobPosition($jobOffers, $jobPositionId){
 
             $jobOfferList = array();
-            foreach ($jobOffers as $jo){
+            if(is_array($jobOffers)) {
+                foreach ($jobOffers as $jo){
                 if($jo->getJobPosition() == $jobPositionId)
                     array_push($jobOfferList,$jo);
 
+                }
             }
             return $jobOfferList;
         }
@@ -99,6 +113,56 @@
             $this->Index('all','all','Gracias por utilizar Ofertas Laborales.');
         }
 
-        
+        public function FinishJobOffer($jobOfferId){
+            $careerApiDAO = new CareerApiDAO();
+            $studentApiDAO = new StudentApiDAO();
+            $jobOfferDAO = new JobOfferDAO();
+            $careerList = $careerApiDAO->GetAll();
+            $studentList = $studentApiDAO->GetAll($careerList);
+    
+            $studentsIds = $studentApiDAO->GetStudentsByJobOffer($jobOfferId);
+            if(is_array($studentsIds)){
+                foreach($studentsIds as $sid){
+
+                
+                $student = $studentApiDAO->GetStudentById($careerList,$sid,$studentList);
+
+                $emailController = new EmailController();
+                $asunto = "Fin de Oferta Laboral";
+                
+                 
+                    $cuerpo = ' 
+                    <html> 
+                        <head> 
+                                <title>Fin de Oferta Laboral.</title> 
+                        </head> 
+                    <body> 
+                    <h1>Hola!</h1> 
+                    <p> 
+                    <b>Te informamos que en el día de hoy finalizó la oferta laboral a la cual te postulaste.</b>.
+                         
+                        <br>Queremos que sepas que la empresa tiene tu información de contacto.
+                        <br>Recordá que ya estás habilitado para postularte a una nueva oferta.
+                        <br><br>Te esperamos!
+                        <br><br>Muchas Gracias.
+                        <br>Ofertas Laborales.
+                    </p> 
+                </body> 
+                </html> '; 
+            
+                
+                if($emailController->SendMail($student->getEmail(), $asunto, $cuerpo)){
+                    
+                } else {
+                    $message = "Error al realizar la declinación!";
+                }
+            }
+                //$message = "JobOffer Vencidos Cerrados Correctamente!";
+                $jobOfferDAO->Delete($jobOfferId);
+                $jobOfferList = $jobOfferDAO->GetAllActive();
+                $this->Index('all', 'all');
+            }
+    
+        }
     }
 ?>
