@@ -38,6 +38,7 @@ if(!isset($_SESSION["loggeduser"])){
               <th style="width: 15%;">Email</th>
               <th style="width: 15%;">Tel</th>
               <th style="width: 15%;">Carrera</th>
+              <th style="width: 15%;">CV</th>
               <?php if($_SESSION["loggeduser"]->getProfile() == "Administrador") {?>
               <th style="width: 15%;">Declinar</th>
               <?php } ?>
@@ -56,13 +57,13 @@ if(!isset($_SESSION["loggeduser"])){
                    <td><?php echo $app->getStudent()->getEmail() ?></td>
                    <td><?php echo $app->getStudent()->getPhoneNumber() ?></td>   
                    <td><?php echo $app->getStudent()->getCareer()->getDescription() ?> </td>
-                   
+                   <td><button class="btn btn-light btn-sm" href=<?php echo FRONT_ROOT.$app->getResume()?> target="_blank" rel="noopener noreferrer">Ver</button></td>
                    <?php if($_SESSION["loggeduser"]->getProfile() == "Administrador") {?>
                    <td>
 
                    <form action="<?php echo FRONT_ROOT . 'Appointment/Remove' ?>" method="POST">
                       
-                      <button type="submit" value="<?php echo $app->getAppointmentId() ?>" class="btn btn-light btn-sm" name="id">Declinar</button>
+                      <button type="submit" value="<?php echo $app->getAppointmentId() ?>" class="btn btn-danger btn-sm" name="id">Declinar</button>
                       <input type="hidden" value="<?php echo $app->getjobOffer() ?>" name="jobOfferId">
                       <input type="hidden" value="<?php $app->getStudent()->getEmail() ?>" name="email">
                     </form>
